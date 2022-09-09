@@ -21,7 +21,6 @@ class PixiCanvasManager {
         const canvasWidth = this.sizing.canvasWidth ? this.sizing.canvasWidth : this.parentElement.offsetWidth;
         const canvasHeight = this.sizing.canvasHeight ? this.sizing.canvasHeight : this.parentElement.offsetHeight;
         this.pixiApp.renderer.resize(canvasWidth, canvasHeight);
-        console.log(canvasWidth, canvasHeight);
 
         if (this.sizing.scaleTo === 'height') {
             scaleRatio = this.sizing.baseHeight / canvasHeight;
@@ -30,7 +29,6 @@ class PixiCanvasManager {
             scaleRatio = this.sizing.baseWidth / canvasWidth;
         }
 
-        console.log(scaleRatio);
         this.pixiApp.stage.scale.x = this.sizing.baseHeight * scaleRatio;
         this.pixiApp.stage.scale.y = this.sizing.baseWidth * scaleRatio;
     }

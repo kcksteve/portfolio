@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import PixiAppManager from './PixiHelpers/PixiAppManager';
 import PIXIOBJECTS from './pixiObjects';
+import StarfieldScene from './Scenes/StarfieldScene';
 
 const PixiDiv = () => {
   const appDiv = useRef();
@@ -13,9 +14,10 @@ const PixiDiv = () => {
     canvasHeight: null,
     scaleTo: 'height'
   }
+  const scenes = [StarfieldScene]
 
   const setupPixi = (parentElement) => {
-    pixiAppManager = new PixiAppManager(PIXIOBJECTS, parentElement, 'Hyperjump', sizing);
+    pixiAppManager = new PixiAppManager(PIXIOBJECTS, parentElement, pixiName, sizing, scenes);
   };
 
   useEffect(() => {
