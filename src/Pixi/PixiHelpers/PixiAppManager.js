@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import PixiCanvasManager from "./PixiCanvasManager";
 import PixiLoadingManager from "./PixiLoadingManager";
 import PixiSceneManager from "./PixiSceneManager";
+import PixiObjectConstructor from './PixiObjectConstructor';
 
 class PixiAppManager {
     name;
@@ -9,7 +10,7 @@ class PixiAppManager {
     pixiLoadingManager;
     pixiCanvasManager;
     pixiSceneManager;
-    pixiObjects;
+    pixiObjectConstructor;
     parentElement;
 
     constructor(pixiObjects, parentElement, name, sizing, scenes) {
@@ -17,8 +18,10 @@ class PixiAppManager {
         this.parentElement = parentElement;
         this.name = name;
         this.pixiCanvasManager = new PixiCanvasManager(this.pixiApp, this.parentElement, name, sizing);
+        this.pixiObjectConstructor = new PixiObjectConstructor(pixiObjects);
         this.pixiLoadingManager = new PixiLoadingManager(this.pixiApp, pixiObjects, () =>
-        this.pixiSceneManager = new PixiSceneManager(this.pixiApp, scenes));
+        this.pixiSceneManager = new PixiSceneManager(this.pixiApp, this.pixiObjectConstructor, scenes)
+        );
     }
 }
 

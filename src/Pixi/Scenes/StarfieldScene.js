@@ -1,20 +1,18 @@
+import PixiObjectConstructor from "../PixiHelpers/PixiObjectConstructor";
 import PixiScene from "../PixiHelpers/PixiScene";
 import * as PIXI from 'pixi.js';
 
 class StarfieldScene extends PixiScene {
     name = 'starfield';
-    container;
     isDefault = true;
-    isLoaded;
-    sceneManager;
 
-    constructor(sceneManager) {
-        super(sceneManager);
+    constructor(sceneManager, pixiObjects) {
+        super(sceneManager, pixiObjects);
     }
 
     load(parent) {
         super.load(parent);
-        console.log('loaded');
+        this.pixiObjectConstructor.test();
     }
 
     unload() {

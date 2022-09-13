@@ -1,12 +1,14 @@
 class PixiSceneManager {
     pixiApp;
+    pixiObjectConstructor;
     scenes = [];
 
-    constructor(pixiApp, scenes) {
+    constructor(pixiApp, pixiObjectConstructor, scenes) {
         this.pixiApp = pixiApp;
+        this.pixiObjectConstructor = pixiObjectConstructor;
 
         scenes.forEach(scene => {
-            this.scenes.push(new scene(this));
+            this.scenes.push(new scene(this, pixiObjectConstructor));
         });
 
         this.scenes.find(scene =>

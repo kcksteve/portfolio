@@ -31,6 +31,10 @@ class PixiCanvasManager {
 
         this.pixiApp.stage.scale.x = this.sizing.baseHeight * scaleRatio;
         this.pixiApp.stage.scale.y = this.sizing.baseWidth * scaleRatio;
+
+        //Sets the origin to the center of the screen
+        this.pixiApp.stage.position.x = this.pixiApp.renderer.width / 2;
+        this.pixiApp.stage.position.y = this.pixiApp.renderer.height / 2;
     }
 
     style() {
@@ -41,7 +45,6 @@ class PixiCanvasManager {
         this.pixiApp.view.style.padding = 0;
         this.pixiApp.view.style.margin = 0;
         this.pixiApp.view.style.display = 'block';
-        //document.body.style.overflow = 'auto';
     }
 }
 

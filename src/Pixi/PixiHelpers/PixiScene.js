@@ -1,4 +1,6 @@
 import { Container } from 'pixi.js';
+import * as PIXI from 'pixi.js';
+
 
 class PixiScene {
     name;
@@ -6,9 +8,11 @@ class PixiScene {
     isDefault = false;
     isLoaded;
     sceneManager;
+    pixiObjectConstructor;
 
-    constructor(sceneManager) {
+    constructor(sceneManager, pixiObjectConstructor) {
         this.sceneManager = sceneManager;
+        this.pixiObjectConstructor = pixiObjectConstructor;
         this.isLoaded = false;
     }
 
