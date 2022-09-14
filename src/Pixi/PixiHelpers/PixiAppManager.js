@@ -19,7 +19,7 @@ class PixiAppManager {
         this.name = name;
         this.pixiCanvasManager = new PixiCanvasManager(this.pixiApp, this.parentElement, name, sizing);
         this.pixiObjectConstructor = new PixiObjectConstructor(pixiObjects);
-        this.pixiLoadingManager = new PixiLoadingManager(this.pixiApp, pixiObjects, () =>
+        this.pixiLoadingManager = new PixiLoadingManager(this.pixiApp, pixiObjects, this, () =>
         this.pixiSceneManager = new PixiSceneManager(this.pixiApp, this.pixiObjectConstructor, scenes)
         );
     }

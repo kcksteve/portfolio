@@ -23,14 +23,14 @@ class PixiCanvasManager {
         this.pixiApp.renderer.resize(canvasWidth, canvasHeight);
 
         if (this.sizing.scaleTo === 'height') {
-            scaleRatio = this.sizing.baseHeight / canvasHeight;
+            scaleRatio = canvasHeight / this.sizing.baseHeight;
         }
         else if (this.sizing.scaleTo === 'width') {
-            scaleRatio = this.sizing.baseWidth / canvasWidth;
+            scaleRatio =  canvasWidth / this.sizing.baseWidth;
         }
 
-        this.pixiApp.stage.scale.x = this.sizing.baseHeight * scaleRatio;
-        this.pixiApp.stage.scale.y = this.sizing.baseWidth * scaleRatio;
+        this.pixiApp.stage.scale.x = scaleRatio;
+        this.pixiApp.stage.scale.y = scaleRatio;
 
         //Sets the origin to the center of the screen
         this.pixiApp.stage.position.x = this.pixiApp.renderer.width / 2;

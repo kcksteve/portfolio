@@ -12,7 +12,7 @@ class StarfieldScene extends PixiScene {
 
     load(parent) {
         super.load(parent);
-        this.pixiObjectConstructor.test();
+        this.pixiObjectConstructor.constructById(0, this.container);
     }
 
     unload() {
