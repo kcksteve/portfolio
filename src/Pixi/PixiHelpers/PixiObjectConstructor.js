@@ -8,28 +8,33 @@ class PixiObjectConstructor {
         this.pixiObjects = pixiObjects;
     }
 
-    constructById(id, parent) {
-        const pixiObject =  this.pixiObjects[id];
+    constructById(id, parent, overrides) {
+        let pixiObject;
+        if (!overrides) {
+            pixiObject =  this.pixiObjects[id];
+        }
+        else {
+            pixiObject = {...this.pixiObjects[id], ...overrides};
+        }
         switch(pixiObject.type) {
             case 'sprite':
-                this.#constructSprite(pixiObject, parent);
+                this.#constructSprite(pixiObject, parent, overrides);
                 break;
         }
     }
 
     #constructSprite(pixiObject, parent) {
         let object = new PIXI.Sprite(this.pixiResources[pixiObject.name].texture);
-
+        this.#applyRequiredProperties(pixiObject, object);
         this.#applyTranslation(pixiObject, object);
+        parent.addChild(object);
+        console.log(object);
+        this.#constructChildren(pixiObject, object);
+    }
+
+    #applyRequiredProperties(pixiObject, object) {
         object.name = pixiObject.name;
         object.id = pixiObject.id;
-        parent.addChild(object);
-
-        console.log(object);
-
-        if (pixiObject.hasOwnProperty('children')) {
-            this.#constructSprite(parent)
-        }
     }
 
     #applyTranslation(pixiObject, object) {
@@ -42,25 +47,33 @@ class PixiObjectConstructor {
         let positionZ = 0;
         let angle = 0;
 
-        if (pixiObject.hasOwnProperty('translation')) {
-            if (pixiObject.translation.hasOwnProperty('anchor')) {
-                anchorX = pixiObject.translation.anchor.x;
-                anchorY = pixiObject.translation.anchor.y;
-            }
 
-            if (pixiObject.translation.hasOwnProperty('scale')) {
-                scaleX = pixiObject.translation.scale.x;
-                scaleY = pixiObject.translation.scale.y;
-            }
+        if (pixiObject.hasOwnProperty('anchorX')) {
+            anchorX = pixiObject.anchorX;
+        }
 
-            if (pixiObject.translation.hasOwnProperty('position')) {
-                positionX = pixiObject.translation.position.x;
-                positionY = pixiObject.translation.position.y;
-            }
+        if (pixiObject.hasOwnProperty('anchorY')) {
+            anchorY = pixiObject.anchorY;
+        }
 
-            if (pixiObject.translation.hasOwnProperty('angle')) {
-                angle = pixiObject.translation.angle;
-            }
+        if (pixiObject.hasOwnProperty('scaleX')) {
+            scaleX = pixiObject.scaleX;
+        }
+
+        if (pixiObject.hasOwnProperty('scaleY')) {
+            scaleY = pixiObject.scaleY;
+        }
+
+        if (pixiObject.hasOwnProperty('positionX')) {
+            positionX = pixiObject.positionX;
+        }
+
+        if (pixiObject.hasOwnProperty('positionZ')) {
+            positionZ = pixiObject.positionZ;
+        }
+
+        if (pixiObject.hasOwnProperty('angle')) {
+            angle = pixiObject.angle;
         }
 
         object.sortableChildren = true;
@@ -72,6 +85,14 @@ class PixiObjectConstructor {
         object.position.y = positionY;
         object.zIndex = positionZ;
         object.angle = angle;
+    }
+
+    #constructChildren(pixiObject, parent) {
+        if (pixiObject.hasOwnProperty('children') && pixiObject.children) {
+            pixiObject.children.forEach(child => {
+                this.constructById(child.id, parent, child);
+            });
+        }
     }
 }
 

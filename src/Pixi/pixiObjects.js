@@ -1,3 +1,4 @@
+import PIXILAYERS from './pixiLayers';
 import sonicImg from '../images/sonic.png';
 
 const PIXIOBJECTS = [
@@ -6,22 +7,22 @@ const PIXIOBJECTS = [
         type: 'sprite',
         name: 'sonic',
         image: sonicImg,
-        translation: {
-            anchor: {
-                x: 0.5,
-                y: 0.5
-            },
-            scale: {
-                x: 2,
-                y: 2
-            },
-            position: {
-                x: 100,
-                y: 0,
-                z: 0
-            },
-            angle: 0
-        }
+        anchorX: 0.5,
+        anchorY: 0.5,
+        scaleX: 2,
+        scaleY: 2,
+        positionX: 200,
+        positionY: 200,
+        positionZ: PIXILAYERS.background,
+        angle: 90,
+        children: [
+            {
+                id: 0,
+                scaleX: 1,
+                scaleY: 1,
+                children: null
+            }
+        ]
     }
 ]
 
