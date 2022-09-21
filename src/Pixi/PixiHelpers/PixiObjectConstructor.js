@@ -1,11 +1,15 @@
 import * as PIXI from 'pixi.js';
 
 class PixiObjectConstructor {
+    pixiApp;
     pixiObjects;
+    pixiTweenConstructor;
     pixiResources;
 
-    constructor(pixiObjects) {
+    constructor(pixiApp, pixiObjects, pixiTweenConstructor) {
+        this.pixiApp = pixiApp;
         this.pixiObjects = pixiObjects;
+        this.pixiTweenConstructor = pixiTweenConstructor;
     }
 
     constructById(id, parent, overrides) {
@@ -27,6 +31,7 @@ class PixiObjectConstructor {
         let object = new PIXI.Sprite(this.pixiResources[pixiObject.name].texture);
         this.#applyRequiredProperties(pixiObject, object);
         this.#applyTranslation(pixiObject, object);
+        this.#applyTweens(pixiObject, object);
         parent.addChild(object);
         console.log(object);
         this.#constructChildren(pixiObject, object);
@@ -35,6 +40,20 @@ class PixiObjectConstructor {
     #applyRequiredProperties(pixiObject, object) {
         object.name = pixiObject.name;
         object.id = pixiObject.id;
+    }
+
+    #applyTweens(pixiObject, object) {
+        if (pixiObject.hasOwnProperty('tweens')) {
+            object.tweens = [];
+            pixiObject.tweens.forEach((tween) => {
+                object.tweens.push(
+                    this.pixiTweenConstructor.createTween(
+                        this.pixiApp,
+                        object,
+                        tween
+                    ));
+            });
+        }
     }
 
     #applyTranslation(pixiObject, object) {
@@ -66,6 +85,10 @@ class PixiObjectConstructor {
 
         if (pixiObject.hasOwnProperty('positionX')) {
             positionX = pixiObject.positionX;
+        }
+
+        if (pixiObject.hasOwnProperty('positionY')) {
+            positionY = pixiObject.positionY;
         }
 
         if (pixiObject.hasOwnProperty('positionZ')) {

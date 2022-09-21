@@ -3,6 +3,7 @@ import PixiCanvasManager from "./PixiCanvasManager";
 import PixiLoadingManager from "./PixiLoadingManager";
 import PixiSceneManager from "./PixiSceneManager";
 import PixiObjectConstructor from './PixiObjectConstructor';
+import PixiTweenConstructor from './PixiTweenConstructor';
 
 class PixiAppManager {
     name;
@@ -11,6 +12,7 @@ class PixiAppManager {
     pixiCanvasManager;
     pixiSceneManager;
     pixiObjectConstructor;
+    pixiTweenConstructor;
     parentElement;
 
     constructor(pixiObjects, parentElement, name, sizing, scenes) {
@@ -18,7 +20,8 @@ class PixiAppManager {
         this.parentElement = parentElement;
         this.name = name;
         this.pixiCanvasManager = new PixiCanvasManager(this.pixiApp, this.parentElement, name, sizing);
-        this.pixiObjectConstructor = new PixiObjectConstructor(pixiObjects);
+        this.pixiTweenConstructor = new PixiTweenConstructor(this.pixiApp);
+        this.pixiObjectConstructor = new PixiObjectConstructor(this.pixiApp, pixiObjects, this.pixiTweenConstructor);
         this.pixiLoadingManager = new PixiLoadingManager(this.pixiApp, pixiObjects, this, () =>
         this.pixiSceneManager = new PixiSceneManager(this.pixiApp, this.pixiObjectConstructor, scenes)
         );

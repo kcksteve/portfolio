@@ -2,6 +2,7 @@ import PixiEasings from "./PixiEasings";
 import PixiTweenPosition from "./PixiTweenPosition";
 import PixiTweenScale from "./PixiTweenScale";
 import PixiTweenRotation from "./PixiTweenRotation";
+import PixiTweenOpacity from "./PixiTweenOpacity";
 
 class PixiTweenConstructor {
     pixiApp;
@@ -9,7 +10,8 @@ class PixiTweenConstructor {
     pixiTweens = {
         PixiTweenPosition,
         PixiTweenScale,
-        PixiTweenRotation
+        PixiTweenRotation,
+        PixiTweenOpacity
     }
 
     constructor(pixiApp) {
@@ -17,7 +19,7 @@ class PixiTweenConstructor {
     }
 
     createTween(pixiApp, pixiObject, tweenConfig) {
-        return new [tweenConfig.tweenType](pixiApp, pixiObject, this.pixiEasings, tweenConfig);
+        return new tweenConfig.tweenType(pixiApp, pixiObject, this.pixiEasings, tweenConfig);
     }
 }
 

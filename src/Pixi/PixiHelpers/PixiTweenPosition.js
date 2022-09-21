@@ -1,27 +1,37 @@
 import PixiTween from "./PixiTween";
 
+//Tween for position over one or two axis
 class PixiTweenPosition extends PixiTween {
-    constructor() {
-        super();
+    constructor(pixiApp, pixiObject, pixiEasings, tweenConfig) {
+        super(pixiApp, pixiObject, pixiEasings, tweenConfig);
     }
 
+    //Called before the start of the animation to refresh the start/end values for animations
     updateTweenTarget() {
-        if (!this.targetFrom.x || !this.targetFrom.y) {
-            if (!this.targetFrom.x) {
-                this.currentFrom.x = this.pixiObject.position.x;
-                this.currentTo.x = this.pixiObject.position.x + this.targetTo.x;
-            }
-            if (!this.targetFrom.y) {
-                this.currentFrom.y = this.pixiObject.position.y
-                this.currentTo.y = this.pixiObject.position.y + this.targetTo.y;
-            }
+        if (!this.targetFrom.x && this.targetTo.x) {
+            this.currentFrom.x = this.pixiObject.position.x;
+            this.currentTo.x = this.pixiObject.position.x + this.targetTo.x;
+        }
+        else if (this.targetFrom.x && this.targetTo.x) {
+            this.currentFrom.x = this.targetFrom.x;
+            this.currentTo.x = this.targetTo.x;
+        }
+
+        if (!this.targetFrom.y && this.targetTo.y) {
+            this.currentFrom.y = this.pixiObject.position.y;
+            this.currentTo.y = this.pixiObject.position.y + this.targetTo.y;
+        }
+        else if (this.targetFrom.y && this.targetTo.y) {
+            this.currentFrom.y = this.targetFrom.y;
+            this.currentTo.y = this.targetTo.y;
         }
     }
 
+    //Called each frame to step the tween forward
     stepTween() {
         if (this.isPlaying) {
-            if (this.progress + this.pixiApp.ticker.deltaTime < this.runtimeTotal) {
-                this.progress += this.pixiApp.ticker.deltaTime;
+            if (this.progress + this.pixiApp.ticker.deltaMS < this.runtimeTotal) {
+                this.progress += this.pixiApp.ticker.deltaMS;
             }
             else {
                 this.progress = this.runtimeTotal;
@@ -40,7 +50,7 @@ class PixiTweenPosition extends PixiTween {
             }
 
             if (this.progress >= this.runtimeTotal) {
-                this.#onFinished();
+                this.onFinished();
             }
         }
     }
