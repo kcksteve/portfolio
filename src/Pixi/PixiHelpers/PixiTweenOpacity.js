@@ -1,27 +1,28 @@
 import PixiTween from "./PixiTween";
 
+//Tween for opacity / alpha
 class PixiTweenOpacity extends PixiTween {
-    constructor() {
-        super();
+    constructor(pixiApp, pixiObject, pixiEasings, tweenConfig) {
+        super(pixiApp, pixiObject, pixiEasings, tweenConfig);
     }
 
+    //Called before the start of the animation to refresh the start/end values for animations
     updateTweenTarget() {
-        if (!this.targetFrom.x || !this.targetFrom.y) {
-            if (!this.targetFrom.x) {
-                this.currentFrom.x = this.pixiObject.position.x;
-                this.currentTo.x = this.pixiObject.position.x + this.targetTo.x;
-            }
-            if (!this.targetFrom.y) {
-                this.currentFrom.y = this.pixiObject.position.y
-                this.currentTo.y = this.pixiObject.position.y + this.targetTo.y;
-            }
+        if (this.targetFrom.x === null && this.targetTo.x !== null) {
+            this.currentFrom.x = this.pixiObject.alpha;
+            this.currentTo.x = this.pixiObject.alpha + this.targetTo.x;
+        }
+        else if (this.targetFrom.x !== null && this.targetTo.x !== null) {
+            this.currentFrom.x = this.targetFrom.x;
+            this.currentTo.x = this.targetTo.x;
         }
     }
 
+    //Called each frame to step the tween forward
     stepTween() {
         if (this.isPlaying) {
-            if (this.progress + this.pixiApp.ticker.deltaTime < this.runtimeTotal) {
-                this.progress += this.pixiApp.ticker.deltaTime;
+            if (this.progress + this.pixiApp.ticker.deltaMS < this.runtimeTotal) {
+                this.progress += this.pixiApp.ticker.deltaMS;
             }
             else {
                 this.progress = this.runtimeTotal;
@@ -29,13 +30,8 @@ class PixiTweenOpacity extends PixiTween {
 
             if (this.progress >= this.startDelay) {
                 if (this.currentTo.x) {
-                    const deltaX = this.currentFrom.x - this.currentTo.x;
-                    this.pixiObject.position.x = this.currentFrom.x + deltaX * this.easing((this.progress - this.startDelay) / this.runtime);
-                }
-
-                if (this.currentTo.y) {
-                    const deltaY = this.currentFrom.y - this.currentTo.y;
-                    this.pixiObject.position.y = this.currentFrom.y + deltaY * this.easing((this.progress - this.startDelay) / this.runtime);
+                    const deltaX = this.currentTo.x - this.currentFrom.x;
+                    this.pixiObject.alpha = this.currentFrom.x + deltaX * this.easing((this.progress - this.startDelay) / this.runtime);
                 }
             }
 

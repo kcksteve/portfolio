@@ -1,6 +1,7 @@
 import PIXILAYERS from './pixiLayers';
 import sonicImg from '../images/sonic.png';
 import PixiTweenPosition from './PixiHelpers/PixiTweenPosition';
+import PixiTweenOpacity from './PixiHelpers/PixiTweenOpacity';
 
 const PIXIOBJECTS = [
     {
@@ -16,6 +17,7 @@ const PIXIOBJECTS = [
         positionY: 0,
         positionZ: PIXILAYERS.background,
         angle: 90,
+        opacity: 0.5,
         // children: [
         //     {
         //         id: 0,
@@ -27,17 +29,17 @@ const PIXIOBJECTS = [
         tweens: [
             {
                 name: 'test1',
-                tweenType: PixiTweenPosition,
+                tweenType: PixiTweenOpacity,
                 runtime: 2000,
-                easing: 'linear',
+                startDelay: 2000,
+                easing: 'inOutQuad',
                 playAtStart: true,
-                // targetFrom: {
-                //     x: 200,
-                //     y: 200
-                // },
+                isLooping: true,
+                targetFrom: {
+                    x: 0
+                },
                 targetTo: {
-                    x: 300,
-                    y: 300
+                    x: 1
                 }
             }
         ]

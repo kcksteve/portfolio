@@ -77,6 +77,11 @@ class PixiTween {
                 this.targetFrom.y = null;
             }
         }
+        else {
+            this.targetFrom.x = null;
+            this.targetFrom.y = null;
+        }
+        console.log(this.targetFrom, this.targetTo);
 
         //Optional vars
         if (tweenConfig.hasOwnProperty('isLooping')) {
@@ -97,7 +102,7 @@ class PixiTween {
         }
 
         if (tweenConfig.hasOwnProperty('onFinishedCallback')) {
-            this.onFinishedCallback = this.onFinishedCallback;
+            this.onFinishedCallback = tweenConfig.onFinishedCallback;
         }
 
         this.boundStepTween = () => this.stepTween();

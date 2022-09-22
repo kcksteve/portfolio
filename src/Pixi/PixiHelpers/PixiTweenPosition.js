@@ -8,20 +8,20 @@ class PixiTweenPosition extends PixiTween {
 
     //Called before the start of the animation to refresh the start/end values for animations
     updateTweenTarget() {
-        if (!this.targetFrom.x && this.targetTo.x) {
+        if (this.targetFrom.x === null && this.targetTo.x !== null) {
             this.currentFrom.x = this.pixiObject.position.x;
             this.currentTo.x = this.pixiObject.position.x + this.targetTo.x;
         }
-        else if (this.targetFrom.x && this.targetTo.x) {
+        else if (this.targetFrom.x !== null && this.targetTo.x !== null) {
             this.currentFrom.x = this.targetFrom.x;
             this.currentTo.x = this.targetTo.x;
         }
 
-        if (!this.targetFrom.y && this.targetTo.y) {
+        if (this.targetFrom.y === null && this.targetTo.y !== null) {
             this.currentFrom.y = this.pixiObject.position.y;
             this.currentTo.y = this.pixiObject.position.y + this.targetTo.y;
         }
-        else if (this.targetFrom.y && this.targetTo.y) {
+        else if (this.targetFrom.y !== null && this.targetTo.y !== null) {
             this.currentFrom.y = this.targetFrom.y;
             this.currentTo.y = this.targetTo.y;
         }
@@ -39,12 +39,12 @@ class PixiTweenPosition extends PixiTween {
 
             if (this.progress >= this.startDelay) {
                 if (this.currentTo.x) {
-                    const deltaX = this.currentFrom.x - this.currentTo.x;
+                    const deltaX = this.currentTo.x - this.currentFrom.x;
                     this.pixiObject.position.x = this.currentFrom.x + deltaX * this.easing((this.progress - this.startDelay) / this.runtime);
                 }
 
                 if (this.currentTo.y) {
-                    const deltaY = this.currentFrom.y - this.currentTo.y;
+                    const deltaY =  this.currentTo.y - this.currentFrom.y;
                     this.pixiObject.position.y = this.currentFrom.y + deltaY * this.easing((this.progress - this.startDelay) / this.runtime);
                 }
             }

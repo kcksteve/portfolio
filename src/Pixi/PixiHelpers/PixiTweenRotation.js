@@ -7,10 +7,7 @@ class PixiTweenRotation extends PixiTween {
 
     updateTweenTarget() {
         if (!this.targetFrom.hasOwnProperty('x')) {
-            this.currentFrom.x = this.pixiObject.position.x
-        }
-        if (!this.targetFrom.hasOwnProperty('y')) {
-            this.currentFrom.y = this.pixiObject.position.y
+            this.currentFrom.x = this.pixiObject.angle
         }
     }
 

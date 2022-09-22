@@ -30,7 +30,7 @@ class PixiObjectConstructor {
     #constructSprite(pixiObject, parent) {
         let object = new PIXI.Sprite(this.pixiResources[pixiObject.name].texture);
         this.#applyRequiredProperties(pixiObject, object);
-        this.#applyTranslation(pixiObject, object);
+        this.#applyParameters(pixiObject, object);
         this.#applyTweens(pixiObject, object);
         parent.addChild(object);
         console.log(object);
@@ -56,7 +56,7 @@ class PixiObjectConstructor {
         }
     }
 
-    #applyTranslation(pixiObject, object) {
+    #applyParameters(pixiObject, object) {
         let anchorX = 0.5;
         let anchorY = 0.5;
         let scaleX = 1;
@@ -65,6 +65,7 @@ class PixiObjectConstructor {
         let positionY = 0;
         let positionZ = 0;
         let angle = 0;
+        let opacity = 1;
 
 
         if (pixiObject.hasOwnProperty('anchorX')) {
@@ -99,6 +100,10 @@ class PixiObjectConstructor {
             angle = pixiObject.angle;
         }
 
+        if (pixiObject.hasOwnProperty('opacity')) {
+            opacity = pixiObject.opacity;
+        }
+
         object.sortableChildren = true;
         object.anchor.x = anchorX;
         object.anchor.y = anchorY;
@@ -108,6 +113,7 @@ class PixiObjectConstructor {
         object.position.y = positionY;
         object.zIndex = positionZ;
         object.angle = angle;
+        object.alpha = opacity;
     }
 
     #constructChildren(pixiObject, parent) {
