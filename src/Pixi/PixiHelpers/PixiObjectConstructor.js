@@ -1,9 +1,15 @@
 import * as PIXI from 'pixi.js';
 
+//Creates pixi objects from an id that it finds in the definition objects.
+//Appends them to the parent object
 class PixiObjectConstructor {
+    //Ref to pixi app
     pixiApp;
+    //Array of objects containing the definitions of objects to construct
     pixiObjects;
+    //Tween contructor object
     pixiTweenConstructor;
+    //Resources (textures) preloaded by the PixiLoadinManager
     pixiResources;
 
     constructor(pixiApp, pixiObjects, pixiTweenConstructor) {
@@ -12,6 +18,9 @@ class PixiObjectConstructor {
         this.pixiTweenConstructor = pixiTweenConstructor;
     }
 
+    //Create an object by the matching id in pixiObjects
+    //Adds it to the parent object
+    //Uses the override object to replace any of the attibutes of the object
     constructById(id, parent, overrides) {
         let pixiObject;
         if (!overrides) {
@@ -27,21 +36,24 @@ class PixiObjectConstructor {
         }
     }
 
+    //Used to conturcut static spite type objects
     #constructSprite(pixiObject, parent) {
         let object = new PIXI.Sprite(this.pixiResources[pixiObject.name].texture);
         this.#applyRequiredProperties(pixiObject, object);
-        this.#applyParameters(pixiObject, object);
+        this.#applyVisualProperties(pixiObject, object);
         this.#applyTweens(pixiObject, object);
         parent.addChild(object);
         console.log(object);
         this.#constructChildren(pixiObject, object);
     }
 
+    //Applies the required properties from the object definition to the object
     #applyRequiredProperties(pixiObject, object) {
         object.name = pixiObject.name;
         object.id = pixiObject.id;
     }
 
+    //Adds tween objects from the object definition to the object
     #applyTweens(pixiObject, object) {
         if (pixiObject.hasOwnProperty('tweens')) {
             object.tweens = [];
@@ -56,7 +68,9 @@ class PixiObjectConstructor {
         }
     }
 
-    #applyParameters(pixiObject, object) {
+    //Applies the visual properties from the object definition to the object
+    //Includes defaults if property not specified
+    #applyVisualProperties(pixiObject, object) {
         let anchorX = 0.5;
         let anchorY = 0.5;
         let scaleX = 1;
@@ -116,6 +130,8 @@ class PixiObjectConstructor {
         object.alpha = opacity;
     }
 
+    //Calls the contruct object by id for each child object specified
+    //Children can contain parameters to override the parents
     #constructChildren(pixiObject, parent) {
         if (pixiObject.hasOwnProperty('children') && pixiObject.children) {
             pixiObject.children.forEach(child => {

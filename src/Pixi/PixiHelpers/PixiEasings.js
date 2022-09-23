@@ -1,4 +1,6 @@
+//Class to centralize the easing methods and select them based on values
 class PixiEasings {
+    //Select a easing method by the matching string
     getMethodByName(name) {
         switch(name) {
             case 'linear':

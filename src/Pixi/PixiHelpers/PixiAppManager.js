@@ -5,6 +5,7 @@ import PixiSceneManager from "./PixiSceneManager";
 import PixiObjectConstructor from './PixiObjectConstructor';
 import PixiTweenConstructor from './PixiTweenConstructor';
 
+//Creates the base pixi app and supporting classes in required order
 class PixiAppManager {
     name;
     pixiApp;

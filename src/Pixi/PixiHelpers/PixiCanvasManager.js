@@ -1,6 +1,13 @@
+//Manages the canvas pixi is drawing onto
+//Uses the sizing object to determine how to scale
+//The resolution the objects were created in combined with the
+//prefernce to scale to height or width allows black bar free scaling
 class PixiCanvasManager {
+    //Ref to pixi app
     pixiApp;
+    //Element that this canvas will be appended to
     parentElement;
+    //Object containing the parameters used for scaling
     sizing;
 
     constructor(pixiApp, parentElement, name, sizing) {
@@ -16,6 +23,7 @@ class PixiCanvasManager {
         this.resize();
     }
 
+    //Called everytime there is a size cange to adjust scaling
     resize() {
         let scaleRatio = 1;
         const canvasWidth = this.sizing.canvasWidth ? this.sizing.canvasWidth : this.parentElement.offsetWidth;
@@ -37,6 +45,7 @@ class PixiCanvasManager {
         this.pixiApp.stage.position.y = this.pixiApp.renderer.height / 2;
     }
 
+    //Override styles in case of browser defaults
     style() {
         this.parentElement.style.border = 0;
         this.parentElement.style.padding = 0;

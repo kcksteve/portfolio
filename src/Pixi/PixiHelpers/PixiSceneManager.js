@@ -1,3 +1,5 @@
+//Manages the diffent scenes in a pixi app
+//Load, Unload and change between differnt scenes
 class PixiSceneManager {
     pixiApp;
     pixiObjectConstructor;
@@ -16,6 +18,7 @@ class PixiSceneManager {
         ).load(this.pixiApp.stage);
     }
 
+    //Unload any active scenes and load the specified scenes
     changeScene(sceneName) {
         this.scenes.forEach(scene => {
             if (scene.isLoaded) {
@@ -26,12 +29,14 @@ class PixiSceneManager {
         this.loadScene(sceneName);
     }
 
+    //Load a scene by its name
     loadScene(sceneName) {
         this.scenes.find(scene =>
             scene.name === sceneName
         ).load(this.pixiApp.stage);
     }
 
+    //Unload a scene by its name
     unloadScene(sceneName) {
         this.scenes.find(scene =>
             scene.name === sceneName && scene.isLoaded
