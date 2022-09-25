@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import PixiTweenGroup from './PixiTweenGroup';
 
 //Creates pixi objects from an id that it finds in the definition objects.
 //Appends them to the parent object
@@ -42,6 +43,7 @@ class PixiObjectConstructor {
         this.#applyRequiredProperties(pixiObject, object);
         this.#applyVisualProperties(pixiObject, object);
         this.#applyTweens(pixiObject, object);
+        this.#applyTweenGroups(pixiObject, object);
         parent.addChild(object);
         console.log(object);
         this.#constructChildren(pixiObject, object);
@@ -64,6 +66,30 @@ class PixiObjectConstructor {
                         object,
                         tween
                     ));
+            });
+        }
+    }
+
+    //Adds tween group objects from the object definition to the object
+    #applyTweenGroups(pixiObject, object) {
+        if (pixiObject.hasOwnProperty('tweenGroups')) {
+            object.tweenGroups = [];
+            pixiObject.tweenGroups.forEach((tweenGroup) => {
+                const newTweenGroup = new PixiTweenGroup(tweenGroup)
+                object.tweenGroups.push(newTweenGroup);
+
+                if (tweenGroup.hasOwnProperty('tweens')) {
+                    tweenGroup.tweens.forEach((tween) => {
+                        tween.tweenGroup = newTweenGroup;
+                        newTweenGroup.addTweenToGroup(
+                            this.pixiTweenConstructor.createTween(
+                                this.pixiApp,
+                                object,
+                                tween
+                            )
+                        );
+                    });
+                }
             });
         }
     }

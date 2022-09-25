@@ -15,8 +15,8 @@ const PIXIOBJECTS = [
         positionX: 0,
         positionY: 0,
         positionZ: PIXILAYERS.background,
-        angle: 90,
-        opacity: 0.5,
+        angle: 0,
+        opacity: 1,
         // children: [
         //     {
         //         id: 0,
@@ -25,23 +25,65 @@ const PIXIOBJECTS = [
         //         children: null
         //     }
         // ]
-        tweens: [
+        // tweens: [
+        //     {
+        //         name: 'test1',
+        //         tweenType: PIXITWEENS.scale,
+        //         runtime: 2000,
+        //         startDelay: 2000,
+        //         easing: 'inOutQuad',
+        //         playAtStart: true,
+        //         isLooping: true,
+        //         targetFrom: {
+        //             x: 1,
+        //             y: 1
+        //         },
+        //         targetTo: {
+        //             x: 2,
+        //             y: 2
+        //         }
+        //     }
+        // ],
+        tweenGroups: [
             {
-                name: 'test1',
-                tweenType: PIXITWEENS.scale,
-                runtime: 2000,
-                startDelay: 2000,
-                easing: 'inOutQuad',
-                playAtStart: true,
-                isLooping: true,
-                targetFrom: {
-                    x: 1,
-                    y: 1
-                },
-                targetTo: {
-                    x: 2,
-                    y: 2
-                }
+                name: 'group1',
+                tweens: [
+                    {
+                        name: 'test1',
+                        tweenType: PIXITWEENS.scale,
+                        runtime: 2000,
+                        startDelay: 2000,
+                        easing: 'inOutQuad',
+                        playAtStart: true,
+                        isLooping: false,
+                        targetFrom: {
+                            x: 1,
+                            y: 1
+                        },
+                        targetTo: {
+                            x: 2,
+                            y: 2
+                        }
+                    },
+                    {
+                        name: 'test2',
+                        tweenType: PIXITWEENS.position,
+                        runtime: 4000,
+                        startDelay: 2000,
+                        easing: 'inOutQuad',
+                        playAtStart: true,
+                        isLooping: false,
+                        targetFrom: {
+                            x: 0,
+                            y: 0
+                        },
+                        targetTo: {
+                            x: 100,
+                            y: 100
+                        }
+                    }
+                ],
+                onFinishedCallback: function() {console.log('yay done')}
             }
         ]
     }

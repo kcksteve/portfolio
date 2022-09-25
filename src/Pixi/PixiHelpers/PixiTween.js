@@ -147,19 +147,19 @@ class PixiTween {
 
     //Called when the tween reaches the end of its playback
     onFinished() {
+        if (this.isLooping) {
+            this.startTween();
+        }
+        else {
+            this.stopTween();
+        }
+
         if (this.tweenGroup && !this.isLooping) {
             this.tweenGroup.memberFinished();
         }
 
         if (this.onFinishedCallback) {
             this.onFinishedCallback();
-        }
-
-        if (this.isLooping) {
-            this.startTween();
-        }
-        else {
-            this.stopTween();
         }
     }
 }
