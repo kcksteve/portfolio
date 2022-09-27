@@ -3,7 +3,7 @@ import PixiCanvasManager from "./PixiCanvasManager";
 import PixiLoadingManager from "./PixiLoadingManager";
 import PixiSceneManager from "./PixiSceneManager";
 import PixiObjectConstructor from './PixiObjectConstructor';
-import PixiTweenConstructor from './PixiTweenConstructor';
+import PixiTweenConstructor from './Behaviors/PixiTweenConstructor';
 
 //Creates the base pixi app and supporting classes in required order
 class PixiAppManager {

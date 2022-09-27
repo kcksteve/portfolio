@@ -1,5 +1,5 @@
 import PIXILAYERS from './pixiLayers';
-import PIXITWEENS from './PixiHelpers/PixiTweens';
+import PIXITWEENS from './PixiHelpers/Behaviors/PixiTweens';
 import sonicImg from '../images/sonic.png';
 
 const PIXIOBJECTS = [

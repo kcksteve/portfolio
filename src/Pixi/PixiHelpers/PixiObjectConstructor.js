@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import PixiTweenGroup from './PixiTweenGroup';
+import PixiTweenGroup from './Behaviors/PixiTweenGroup';
 
 //Creates pixi objects from an id that it finds in the definition objects.
 //Appends them to the parent object
