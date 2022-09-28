@@ -31,14 +31,18 @@ class PixiRotation {
 
     //Start the rotation behavior
     start() {
-        this.isRunning = true;
-        this.pixiApp.ticker.add(this.boundStep);
+        if (!this.isRunning) {
+            this.isRunning = true;
+            this.pixiApp.ticker.add(this.boundStep);
+        }
     }
 
     //Stop the rotation behavior
     stop() {
-        this.isRunning = false;
-        this.pixiApp.ticker.remove(this.boundStep);
+        if (this.isRunning) {
+            this.isRunning = false;
+            this.pixiApp.ticker.remove(this.boundStep);
+        }
     }
 
     //Step the rotation forward
