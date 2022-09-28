@@ -107,7 +107,11 @@ class PixiTween {
 
         this.boundStepTween = () => this.stepTween();
 
-        if (tweenConfig.playAtStart) this.startTween();
+        if (tweenConfig.hasOwnProperty('playAtStart')) {
+            if (tweenConfig.playAtStart) {
+                this.startTween();
+            }
+        }
     }
 
     //Called before the start of the animation to refresh the start/end values

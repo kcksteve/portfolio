@@ -1,5 +1,7 @@
 import * as PIXI from 'pixi.js';
 import PixiTweenGroup from './Behaviors/PixiTweenGroup';
+import PixiRotation from './Behaviors/PixiRotation';
+import PixiMovement from './Behaviors/PixiMovement';
 
 //Creates pixi objects from an id that it finds in the definition objects.
 //Appends them to the parent object
@@ -37,13 +39,15 @@ class PixiObjectConstructor {
         }
     }
 
-    //Used to conturcut static spite type objects
+    //Used to construct static spite type objects
     #constructSprite(pixiObject, parent) {
         let object = new PIXI.Sprite(this.pixiResources[pixiObject.name].texture);
         this.#applyRequiredProperties(pixiObject, object);
         this.#applyVisualProperties(pixiObject, object);
         this.#applyTweens(pixiObject, object);
         this.#applyTweenGroups(pixiObject, object);
+        this.#applyRotations(pixiObject, object);
+        this.#applyMovements(pixiObject, object);
         parent.addChild(object);
         console.log(object);
         this.#constructChildren(pixiObject, object);
@@ -90,6 +94,34 @@ class PixiObjectConstructor {
                         );
                     });
                 }
+            });
+        }
+    }
+
+    #applyRotations(pixiObject, object) {
+        if (pixiObject.hasOwnProperty('rotations')) {
+            object.rotations = [];
+            pixiObject.rotations.forEach((rotation) => {
+                object.rotations.push(
+                    new PixiRotation(
+                        this.pixiApp,
+                        object,
+                        rotation
+                    ));
+            });
+        }
+    }
+
+    #applyMovements(pixiObject, object) {
+        if (pixiObject.hasOwnProperty('movements')) {
+            object.movements = [];
+            pixiObject.movements.forEach((movement) => {
+                object.movements.push(
+                    new PixiMovement(
+                        this.pixiApp,
+                        object,
+                        movement
+                    ));
             });
         }
     }
