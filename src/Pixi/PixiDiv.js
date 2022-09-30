@@ -27,7 +27,7 @@ const PixiDiv = () => {
   }, []);
 
   return (
-    <div className="pixiApp" ref={appDiv}/>
+    <div className="pixiApp" ref={appDiv} style={{height: '100vh', overflow: 'hidden'}}/>
   );
 }
 
