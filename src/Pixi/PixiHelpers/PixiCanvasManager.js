@@ -23,19 +23,31 @@ class PixiCanvasManager {
         this.resize();
     }
 
-    //Called everytime there is a size cange to adjust scaling
+    //Called everytime there is a size change to adjust scaling
     resize() {
         let scaleRatio = 1;
         const canvasWidth = this.sizing.canvasWidth ? this.sizing.canvasWidth : this.parentElement.offsetWidth;
         const canvasHeight = this.sizing.canvasHeight ? this.sizing.canvasHeight : this.parentElement.offsetHeight;
         this.pixiApp.renderer.resize(canvasWidth, canvasHeight);
 
+        //Height scaling mode will keep the height in frame
         if (this.sizing.hasOwnProperty('scaleTo') && this.sizing.scaleTo === 'height') {
             scaleRatio = canvasHeight / this.sizing.baseHeight;
         }
+        //Width scaling mode will keep the width in frame
         else if (this.sizing.hasOwnProperty('scaleTo') && this.sizing.scaleTo === 'width') {
             scaleRatio =  canvasWidth / this.sizing.baseWidth;
         }
+        //Both scaling mode will keep the width and the height in frame
+        else if (this.sizing.hasOwnProperty('scaleTo') && this.sizing.scaleTo === 'both') {
+            if (canvasHeight / this.sizing.baseHeight < canvasWidth / this.sizing.baseWidth) {
+                scaleRatio = canvasHeight / this.sizing.baseHeight;
+            }
+            else {
+                scaleRatio =  canvasWidth / this.sizing.baseWidth;
+            }
+        }
+        //Full coverage scaling mode will use either the width or the height to cover the whole frame
         else {
             if (canvasHeight / this.sizing.baseHeight > canvasWidth / this.sizing.baseWidth) {
                 scaleRatio = canvasHeight / this.sizing.baseHeight;

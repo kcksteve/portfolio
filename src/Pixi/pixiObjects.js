@@ -2,6 +2,7 @@ import PIXILAYERS from './pixiLayers';
 import PIXITWEENS from './PixiHelpers/Behaviors/PixiTweens';
 import smallStarImg from '../images/SmallStar.png';
 import streakStarImg from '../images/StreakStar.png';
+import cover from '../images/1080.png';
 
 const PIXIOBJECTS = [
     {
@@ -53,6 +54,12 @@ const PIXIOBJECTS = [
         //         onFinishedCallback: function() {console.log('yay done')}
         //     }
         //]
+    },
+    {
+        id: 1,
+        type: 'sprite',
+        name: 'Cover',
+        image: cover,
     }
 ]
 
