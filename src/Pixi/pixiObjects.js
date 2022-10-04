@@ -60,6 +60,26 @@ const PIXIOBJECTS = [
         type: 'sprite',
         name: 'Cover',
         image: cover,
+        tweens: [
+                    {
+                        name: 'test1',
+                        tweenType: PIXITWEENS.rotation,
+                        runtime: 2000,
+                        startDelay: 2000,
+                        easing: 'inOutQuad',
+                        playAtStart: true,
+                        isLooping: true,
+                        isPingPong: true,
+                        targetFrom: {
+                            x: 10,
+                            y: 0
+                        },
+                        targetTo: {
+                            x: 0,
+                            y: 50
+                        }
+                    }
+        ]
     }
 ]
 

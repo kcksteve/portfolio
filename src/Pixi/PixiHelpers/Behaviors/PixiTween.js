@@ -10,6 +10,8 @@ class PixiTween {
     isPlaying = false;
     //True if animation will loop
     isLooping = false;
+    //True if animation plays to the end then back to the start before ending
+    isPingPong = false;
     //X and/or Y value indicating the start point of the animation.
     //If left empty it indicates a relative animation where
     //the animation starts from the current value.
@@ -87,6 +89,11 @@ class PixiTween {
         if (tweenConfig.hasOwnProperty('isLooping')) {
             this.isLooping = tweenConfig.isLooping;
         }
+
+        if (tweenConfig.hasOwnProperty('isPingPong')) {
+            this.isPingPong = tweenConfig.isPingPong;
+        }
+
         if (tweenConfig.hasOwnProperty('startDelay')) {
             this.startDelay = tweenConfig.startDelay;
         }

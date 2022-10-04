@@ -41,6 +41,11 @@ class StarfieldScene extends PixiScene {
                 }
             );
         }
+
+        this.pixiObjectConstructor.constructById(
+            1,
+            this.container
+        );
     }
 
     unload() {
