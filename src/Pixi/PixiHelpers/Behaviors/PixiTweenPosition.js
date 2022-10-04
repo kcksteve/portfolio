@@ -37,29 +37,17 @@ class PixiTweenPosition extends PixiTween {
                 this.progress = this.runtimeTotal;
             }
 
-            let animationProgress = 0;
-            if (!this.isPingPong) {
-                animationProgress = (this.progress - this.startDelay) / this.runtime;
-            }
-            else {
-                const reversePoint = this.startDelay + (this.runtime / 2);
-                if (this.progress <= reversePoint) {
-                    animationProgress = (this.progress - this.startDelay) / (reversePoint - this.startDelay);
-                }
-                else {
-                    animationProgress = 1 - ((this.progress - this.startDelay) / (reversePoint - this.startDelay) - 1);
-                }
-            }
-
             if (this.progress >= this.startDelay) {
+                this.updateProgressAnimation();
+
                 if (this.currentTo.x !== null) {
                     const deltaX = this.currentTo.x - this.currentFrom.x;
-                    this.pixiObject.position.x = this.currentFrom.x + deltaX * this.easing(animationProgress);
+                    this.pixiObject.position.x = this.currentFrom.x + deltaX * this.easing(this.progressAnimation);
                 }
 
                 if (this.currentTo.y !== null) {
                     const deltaY =  this.currentTo.y - this.currentFrom.y;
-                    this.pixiObject.position.y = this.currentFrom.y + deltaY * this.easing(animationProgress);
+                    this.pixiObject.position.y = this.currentFrom.y + deltaY * this.easing(this.progressAnimation);
                 }
             }
 

@@ -25,7 +25,9 @@ class PixiTween {
     //Delay before starting the animation phase
     startDelay = 0;
     //Progress through the animation including delay and animation phase
-    progress;
+    progress = 0;
+    //Progress through the animation phase only
+    progressAnimation = 0;
     //Total length of animation stage
     runtime;
     //Total length including animation and start delay
@@ -124,6 +126,22 @@ class PixiTween {
     //Called before the start of the animation to refresh the start/end values
     updateTweenTarget() {
         //different for each derived class
+    }
+
+    //Updates the progressAnimation value based on the progress value
+    updateProgressAnimation() {
+        if (!this.isPingPong) {
+            this.progressAnimation = (this.progress - this.startDelay) / this.runtime;
+        }
+        else {
+            const reversePoint = this.startDelay + (this.runtime / 2);
+            if (this.progress <= reversePoint) {
+                this.progressAnimation = (this.progress - this.startDelay) / (reversePoint - this.startDelay);
+            }
+            else {
+                this.progressAnimation = 1 - ((this.progress - this.startDelay) / (reversePoint - this.startDelay) - 1);
+            }
+        }
     }
 
     //Starts the tween

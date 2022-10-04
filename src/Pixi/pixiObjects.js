@@ -71,11 +71,11 @@ const PIXIOBJECTS = [
                         isLooping: true,
                         isPingPong: true,
                         targetFrom: {
-                            x: 10,
-                            y: 0
+                            x: 0,
+                            y: 10
                         },
                         targetTo: {
-                            x: 0,
+                            x: 10,
                             y: 50
                         }
                     }

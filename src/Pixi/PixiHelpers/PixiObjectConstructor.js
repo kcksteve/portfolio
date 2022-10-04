@@ -36,6 +36,9 @@ class PixiObjectConstructor {
             case 'sprite':
                 this.#constructSprite(pixiObject, parent, overrides);
                 break;
+            // case 'container':
+            //     this.#constructSprite(pixiObject, parent, overrides);
+            //     break;
         }
     }
 
@@ -49,9 +52,22 @@ class PixiObjectConstructor {
         this.#applyRotations(pixiObject, object);
         this.#applyMovements(pixiObject, object);
         parent.addChild(object);
-        console.log(object);
         this.#constructChildren(pixiObject, object);
     }
+
+    //Used to construct static spite type objects
+    // #constructContainer(pixiObject, parent) {
+    //     let object = new PIXI.Sprite(this.pixiResources[pixiObject.name].texture);
+    //     this.#applyRequiredProperties(pixiObject, object);
+    //     this.#applyVisualProperties(pixiObject, object);
+    //     this.#applyTweens(pixiObject, object);
+    //     this.#applyTweenGroups(pixiObject, object);
+    //     this.#applyRotations(pixiObject, object);
+    //     this.#applyMovements(pixiObject, object);
+    //     parent.addChild(object);
+    //     console.log(object);
+    //     this.#constructChildren(pixiObject, object);
+    // }
 
     //Applies the required properties from the object definition to the object
     #applyRequiredProperties(pixiObject, object) {
