@@ -80,6 +80,18 @@ const PIXIOBJECTS = [
                         }
                     }
         ]
+    },
+    {
+        id: 2,
+        type: 'container',
+        name: 'starContainer',
+        rotations: [
+            {
+                name: 'starSpin',
+                degreesPerSecond: 3,
+                playAtStart: true
+            }
+        ]
     }
 ]
 

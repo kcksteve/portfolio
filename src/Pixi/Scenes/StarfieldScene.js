@@ -12,6 +12,14 @@ class StarfieldScene extends PixiScene {
 
     load(parent) {
         super.load(parent);
+
+        const starContainer = this.pixiObjectConstructor.constructById(
+            2,
+            this.container
+        );
+
+        console.log(starContainer);
+
         const fieldDistFromCenter = 2500;
 
         let posOrNegX = 1;
@@ -33,7 +41,7 @@ class StarfieldScene extends PixiScene {
 
             this.pixiObjectConstructor.constructById(
                 0,
-                this.container,
+                starContainer,
                 {
                     positionX: Math.random() * fieldDistFromCenter * posOrNegX,
                     positionY: Math.random() * fieldDistFromCenter * posOrNegY,
@@ -42,10 +50,7 @@ class StarfieldScene extends PixiScene {
             );
         }
 
-        this.pixiObjectConstructor.constructById(
-            1,
-            this.container
-        );
+
     }
 
     unload() {

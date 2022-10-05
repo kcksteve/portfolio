@@ -42,7 +42,6 @@ class PixiTween {
     boundStepTween;
 
     constructor(pixiApp, pixiObject, pixiEasings, tweenConfig) {
-        console.log(tweenConfig);
         //Required vars
         this.pixiApp = pixiApp;
         this.pixiObject = pixiObject;
@@ -85,7 +84,6 @@ class PixiTween {
             this.targetFrom.x = null;
             this.targetFrom.y = null;
         }
-        console.log(this.targetFrom, this.targetTo);
 
         //Optional vars
         if (tweenConfig.hasOwnProperty('isLooping')) {

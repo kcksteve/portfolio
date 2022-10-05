@@ -34,11 +34,9 @@ class PixiObjectConstructor {
         }
         switch(pixiObject.type) {
             case 'sprite':
-                this.#constructSprite(pixiObject, parent, overrides);
-                break;
-            // case 'container':
-            //     this.#constructSprite(pixiObject, parent, overrides);
-            //     break;
+                return this.#constructSprite(pixiObject, parent, overrides);
+            case 'container':
+                return this.#constructContainer(pixiObject, parent, overrides);
         }
     }
 
@@ -53,21 +51,22 @@ class PixiObjectConstructor {
         this.#applyMovements(pixiObject, object);
         parent.addChild(object);
         this.#constructChildren(pixiObject, object);
+        return object;
     }
 
     //Used to construct static spite type objects
-    // #constructContainer(pixiObject, parent) {
-    //     let object = new PIXI.Sprite(this.pixiResources[pixiObject.name].texture);
-    //     this.#applyRequiredProperties(pixiObject, object);
-    //     this.#applyVisualProperties(pixiObject, object);
-    //     this.#applyTweens(pixiObject, object);
-    //     this.#applyTweenGroups(pixiObject, object);
-    //     this.#applyRotations(pixiObject, object);
-    //     this.#applyMovements(pixiObject, object);
-    //     parent.addChild(object);
-    //     console.log(object);
-    //     this.#constructChildren(pixiObject, object);
-    // }
+    #constructContainer(pixiObject, parent) {
+        let object = new PIXI.Container();
+        this.#applyRequiredProperties(pixiObject, object);
+        this.#applyVisualProperties(pixiObject, object);
+        this.#applyTweens(pixiObject, object);
+        this.#applyTweenGroups(pixiObject, object);
+        this.#applyRotations(pixiObject, object);
+        this.#applyMovements(pixiObject, object);
+        parent.addChild(object);
+        this.#constructChildren(pixiObject, object);
+        return object;
+    }
 
     //Applies the required properties from the object definition to the object
     #applyRequiredProperties(pixiObject, object) {
@@ -193,8 +192,14 @@ class PixiObjectConstructor {
         }
 
         object.sortableChildren = true;
-        object.anchor.x = anchorX;
-        object.anchor.y = anchorY;
+        if (object.isSprite) {
+            object.anchor.x = anchorX;
+            object.anchor.y = anchorY;
+        } else {
+            object.pivot.x = object.width * anchorX;
+            object.pivot.y = object.height * anchorY;
+        }
+
         object.scale.x = scaleX;
         object.scale.y = scaleY;
         object.position.x = positionX;
