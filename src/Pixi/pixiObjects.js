@@ -58,28 +58,10 @@ const PIXIOBJECTS = [
     {
         id: 1,
         type: 'sprite',
-        name: 'Cover',
-        image: cover,
-        tweens: [
-                    {
-                        name: 'test1',
-                        tweenType: PIXITWEENS.rotation,
-                        runtime: 2000,
-                        startDelay: 2000,
-                        easing: 'inOutQuad',
-                        playAtStart: true,
-                        isLooping: true,
-                        isPingPong: true,
-                        targetFrom: {
-                            x: 0,
-                            y: 10
-                        },
-                        targetTo: {
-                            x: 10,
-                            y: 50
-                        }
-                    }
-        ]
+        name: 'StreakStar',
+        image: streakStarImg,
+        scaleX: 0.5,
+        scaleY: 0.5,
     },
     {
         id: 2,
