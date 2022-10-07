@@ -99,7 +99,6 @@ class PixiObjectConstructor {
 
                 if (tweenGroup.hasOwnProperty('tweens')) {
                     tweenGroup.tweens.forEach((tween) => {
-                        tween.tweenGroup = newTweenGroup;
                         newTweenGroup.addTweenToGroup(
                             this.pixiTweenConstructor.createTween(
                                 this.pixiApp,

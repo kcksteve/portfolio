@@ -1,11 +1,13 @@
 //Class to control multiple tweens when they should be played together
 //Gotcha - Looping tweens are not considered when checking if all tweens
-//are finished to call inFinishedCallback
+//are finished to call onFinishedCallback
 class PixiTweenGroup {
     //Name of tween group
     name;
     //Array of tweens in group
     #tweens = [];
+    //Will restart all tweens after all tweens have finished
+    isLooping = false;
     //Function to call when all tweens finish playing
     onFinishedCallback = null;
     //Count of members that are not looping
@@ -15,8 +17,11 @@ class PixiTweenGroup {
 
     constructor(tweenGroupConfig) {
         this.name = tweenGroupConfig.name;
-        if (tweenGroupConfig.onFinishedCallback) {
+        if (tweenGroupConfig.hasOwnProperty('onFinishedCallback')) {
             this.onFinishedCallback = tweenGroupConfig.onFinishedCallback;
+        }
+        if (tweenGroupConfig.hasOwnProperty('isLooping')) {
+            this.isLooping = tweenGroupConfig.isLooping;
         }
     }
 
@@ -43,6 +48,7 @@ class PixiTweenGroup {
 
     //Add a tween to the group
     addTweenToGroup(tween) {
+        tween.tweenGroup = this;
         this.#tweens.push(tween);
     }
 
@@ -59,8 +65,14 @@ class PixiTweenGroup {
             }
         })
 
-        if (this.#nonLoopingMemberCount === this.#nonLoopingMembersFinished && this.onFinishedCallback) {
-            this.onFinishedCallback();
+        if (this.#nonLoopingMemberCount === this.#nonLoopingMembersFinished) {
+            if (this.onFinishedCallback) {
+                this.onFinishedCallback();
+            }
+
+            if (this.isLooping) {
+                this.startAllTweens();
+            }
         }
     }
 }
