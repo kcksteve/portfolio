@@ -1,6 +1,8 @@
 import PIXILAYERS from './pixiLayers';
 import PIXITWEENS from './PixiHelpers/Behaviors/PixiTweens';
 import smallStarImg from '../images/SmallStar.png';
+import largeStarImg from '../images/LargeStar.png';
+//import movingStarImg from '../images/MovingStar.png';
 import streakStarImg from '../images/StreakStar.png';
 import cover from '../images/1080.png';
 
@@ -58,19 +60,35 @@ const PIXIOBJECTS = [
     {
         id: 1,
         type: 'sprite',
+        name: 'LargeStar',
+        image: largeStarImg,
+        scaleX: 0.5,
+        scaleY: 0.5,
+    },
+    {
+        id: 2,
+        type: 'sprite',
         name: 'StreakStar',
         image: streakStarImg,
         scaleX: 0.5,
         scaleY: 0.5,
     },
     {
-        id: 2,
+        id: 3,
+        type: 'sprite',
+        name: 'MovingStar',
+        image: largeStarImg,
+        scaleX: 0.5,
+        scaleY: 0.5,
+    },
+    {
+        id: 4,
         type: 'container',
-        name: 'starContainer',
+        name: 'StarContainer',
         rotations: [
             {
                 name: 'starSpin',
-                degreesPerSecond: 3,
+                degreesPerSecond: 1.5,
                 playAtStart: true
             }
         ]

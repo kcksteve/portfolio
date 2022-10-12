@@ -12,7 +12,7 @@ const PixiDiv = () => {
     baseHeight: 1080,
     canvasWidth: null,
     canvasHeight: null,
-    scaleTo: 'both'
+    scaleTo: 'height'
   }
   const scenes = [StarfieldScene]
 
