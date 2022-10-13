@@ -18,6 +18,10 @@ class PixiCanvasManager {
         parentElement.appendChild(pixiApp.view);
         pixiApp.view.id = name;
 
+        if (sizing.hasOwnProperty('bgColor')) {
+            this.applyBgColor(sizing.bgColor);
+        }
+
         window.addEventListener('resize', () => this.resize());
         this.style();
         this.resize();
@@ -74,6 +78,10 @@ class PixiCanvasManager {
         this.pixiApp.view.style.padding = 0;
         this.pixiApp.view.style.margin = 0;
         this.pixiApp.view.style.display = 'block';
+    }
+
+    applyBgColor(color) {
+        this.pixiApp.renderer.backgroundColor = color;
     }
 }
 

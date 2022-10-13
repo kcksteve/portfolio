@@ -4,6 +4,7 @@ import smallStarImg from '../images/SmallStar.png';
 import largeStarImg from '../images/LargeStar.png';
 //import movingStarImg from '../images/MovingStar.png';
 import streakStarImg from '../images/StreakStar.png';
+import largeStreakStarImg from '../images/LargeStreakStar.png';
 import cover from '../images/1080.png';
 
 const PIXIOBJECTS = [
@@ -92,7 +93,18 @@ const PIXIOBJECTS = [
                 playAtStart: true
             }
         ]
-    }
+    },
+    {
+        id: 5,
+        type: 'sprite',
+        name: 'LargeStreakStar',
+        image: largeStreakStarImg,
+    },
+    {
+        id: 6,
+        type: 'container',
+        name: 'StarSubContainer'
+    },
 ]
 
 export default PIXIOBJECTS;

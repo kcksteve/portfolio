@@ -7,17 +7,18 @@ const PixiDiv = () => {
   const appDiv = useRef();
   const pixiName = 'PixiHyperjump'
   let pixiAppManager;
-  const sizing = {
+  const canvasSettings = {
     baseWidth: 1920,
     baseHeight: 1080,
     canvasWidth: null,
     canvasHeight: null,
-    scaleTo: 'height'
+    scaleTo: 'height',
+    bgColor: 0x050017
   }
   const scenes = [StarfieldScene]
 
   const setupPixi = (parentElement) => {
-    pixiAppManager = new PixiAppManager(PIXIOBJECTS, parentElement, pixiName, sizing, scenes);
+    pixiAppManager = new PixiAppManager(PIXIOBJECTS, parentElement, pixiName, canvasSettings, scenes);
   };
 
   useEffect(() => {
