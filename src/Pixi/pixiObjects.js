@@ -2,9 +2,10 @@ import PIXILAYERS from './pixiLayers';
 import PIXITWEENS from './PixiHelpers/Behaviors/PixiTweens';
 import smallStarImg from '../images/SmallStar.png';
 import largeStarImg from '../images/LargeStar.png';
-//import movingStarImg from '../images/MovingStar.png';
+import movingStarImg from '../images/MovingStar.png';
 import streakStarImg from '../images/StreakStar.png';
 import largeStreakStarImg from '../images/LargeStreakStar.png';
+import blurImg from '../images/Blur.png';
 import cover from '../images/1080.png';
 
 const PIXIOBJECTS = [
@@ -78,7 +79,7 @@ const PIXIOBJECTS = [
         id: 3,
         type: 'sprite',
         name: 'MovingStar',
-        image: largeStarImg,
+        image: movingStarImg,
         scaleX: 0.5,
         scaleY: 0.5,
     },
@@ -105,6 +106,12 @@ const PIXIOBJECTS = [
         type: 'container',
         name: 'StarSubContainer'
     },
+    {
+        id: 7,
+        type: 'sprite',
+        name: 'Blur',
+        image: blurImg,
+    }
 ]
 
 export default PIXIOBJECTS;

@@ -12,26 +12,53 @@ class StarfieldScene extends PixiScene {
     load(parent) {
         super.load(parent);
 
-        const starContainer = this.pixiObjectConstructor.constructById(
-            4,
-            this.container
-        );
-
-        const starContainerFade = this.pixiObjectConstructor.constructById(
-            6,
-            starContainer,
+        const blur = this.pixiObjectConstructor.constructById(
+            7,
+            this.container,
             {
+                opacity: 0,
                 tweenGroups: [
                     {
-                        name: 'fadeAndGrowOut',
+                        name: 'fadeInAndGrow',
+                        tweens: [
+                            {
+                                name: 'fadeIn',
+                                tweenType: PIXITWEENS.opacity,
+                                runtime: 250,
+                                easing: 'outQuint',
+                                targetFrom: {
+                                    x: 0,
+                                },
+                                targetTo: {
+                                    x: 0.05,
+                                }
+                            },
+                            {
+                                name: 'growIn',
+                                tweenType: PIXITWEENS.scale,
+                                runtime: 250,
+                                easing: 'outQuint',
+                                targetFrom: {
+                                    x: 1.5,
+                                    y: 1.5
+                                },
+                                targetTo: {
+                                    x: 3,
+                                    y: 3
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        name: 'fadeOutAndShrink',
                         tweens: [
                             {
                                 name: 'fadeOut',
                                 tweenType: PIXITWEENS.opacity,
-                                runtime: 2000,
-                                easing: 'linear',
+                                runtime: 4500,
+                                easing: 'inQuint',
                                 targetFrom: {
-                                    x: 1,
+                                    x: 0.05,
                                 },
                                 targetTo: {
                                     x: 0,
@@ -40,30 +67,185 @@ class StarfieldScene extends PixiScene {
                             {
                                 name: 'growOut',
                                 tweenType: PIXITWEENS.scale,
-                                runtime: 2100,
-                                easing: 'inCubic',
+                                runtime: 4500,
+                                easing: 'inQuint',
                                 targetFrom: {
-                                    x: 1,
-                                    y: 1
+                                    x: 3,
+                                    y: 3
                                 },
                                 targetTo: {
-                                    x: 2,
-                                    y: 2
+                                    x: 1.5,
+                                    y: 1.5
                                 }
                             }
                         ]
-                    }
-                ]
+                    },
+                    {
+                        name: 'fadeInAndOut',
+                        tweens: [
+                            {
+                                name: 'fadeIn',
+                                tweenType: PIXITWEENS.opacity,
+                                runtime: 150,
+                                easing: 'outQuint',
+                                targetFrom: {
+                                    x: 0,
+                                },
+                                targetTo: {
+                                    x: 0.05,
+                                }
+                            },
+                            {
+                                name: 'growIn',
+                                tweenType: PIXITWEENS.scale,
+                                runtime: 150,
+                                easing: 'outQuint',
+                                targetFrom: {
+                                    x: 1.5,
+                                    y: 1.5
+                                },
+                                targetTo: {
+                                    x: 3,
+                                    y: 3
+                                }
+                            },
+                            {
+                                name: 'fadeOut',
+                                tweenType: PIXITWEENS.opacity,
+                                runtime: 500,
+                                startDelay: 150,
+                                easing: 'inQuint',
+                                targetFrom: {
+                                    x: 0.05,
+                                },
+                                targetTo: {
+                                    x: 0,
+                                }
+                            },
+                            {
+                                name: 'growOut',
+                                tweenType: PIXITWEENS.scale,
+                                runtime: 500,
+                                startDelay: 150,
+                                easing: 'inQuint',
+                                targetFrom: {
+                                    x: 3,
+                                    y: 3
+                                },
+                                targetTo: {
+                                    x: 1.5,
+                                    y: 1.5
+                                }
+                            }
+                        ]
+                    },
+                ],
             }
         );
 
-        const starContainerPermenant = this.pixiObjectConstructor.constructById(
+        const starContainer = this.pixiObjectConstructor.constructById(
+            4,
+            this.container
+        );
+
+        const makeStarContainerFade = (delay, runtime) => {
+            return this.pixiObjectConstructor.constructById(
+                6,
+                starContainer,
+                {
+                    tweenGroups: [
+                        {
+                            name: 'fadeAndGrowOut',
+                            tweens: [
+                                {
+                                    name: 'fadeOut',
+                                    tweenType: PIXITWEENS.opacity,
+                                    runtime: runtime,
+                                    startDelay: delay,
+                                    easing: 'linear',
+                                    targetFrom: {
+                                        x: 1,
+                                    },
+                                    targetTo: {
+                                        x: 0,
+                                    }
+                                },
+                                {
+                                    name: 'growOut',
+                                    tweenType: PIXITWEENS.scale,
+                                    runtime: runtime + 100,
+                                    startDelay: delay,
+                                    easing: 'inCubic',
+                                    targetFrom: {
+                                        x: 1,
+                                        y: 1
+                                    },
+                                    targetTo: {
+                                        x: 2,
+                                        y: 2
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            );
+        }
+
+        const starContainerFade1 = makeStarContainerFade(0, 1900);
+        const starContainerFade2 = makeStarContainerFade(0, 2150);
+        const starContainerFade3 = makeStarContainerFade(0, 2600);
+
+        const starContainerPermenant1 = this.pixiObjectConstructor.constructById(
+                6,
+                starContainer,
+                {
+                    opacity: 0,
+                    scaleX: 0,
+                    scaleY: 0,
+                    tweenGroups: [
+                        {
+                            name: 'fadeInAndGrow',
+                            tweens: [
+                                {
+                                    name: 'fadeIn',
+                                    tweenType: PIXITWEENS.opacity,
+                                    runtime: 2000,
+                                    easing: 'outQuint',
+                                    targetFrom: {
+                                        x: 0,
+                                    },
+                                    targetTo: {
+                                        x: 1,
+                                    }
+                                },
+                                {
+                                    name: 'growIn',
+                                    tweenType: PIXITWEENS.scale,
+                                    runtime: 2000,
+                                    easing: 'outQuint',
+                                    targetFrom: {
+                                        x: 0.5,
+                                        y: 0.5
+                                    },
+                                    targetTo: {
+                                        x: 1,
+                                        y: 1
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            );
+
+        const starContainerPermenant2 = this.pixiObjectConstructor.constructById(
             6,
             starContainer,
             {
                 opacity: 0,
-                scaleX: 0.5,
-                scaleY: 0.5,
+                scaleX: 0,
+                scaleY: 0,
                 tweenGroups: [
                     {
                         name: 'fadeInAndGrow',
@@ -71,8 +253,8 @@ class StarfieldScene extends PixiScene {
                             {
                                 name: 'fadeIn',
                                 tweenType: PIXITWEENS.opacity,
-                                runtime: 3000,
-                                easing: 'outQuint',
+                                runtime: 7500,
+                                easing: 'linear',
                                 targetFrom: {
                                     x: 0,
                                 },
@@ -83,15 +265,35 @@ class StarfieldScene extends PixiScene {
                             {
                                 name: 'growIn',
                                 tweenType: PIXITWEENS.scale,
-                                runtime: 3000,
+                                runtime: 7500,
+                                easing: 'linear',
+                                targetFrom: {
+                                    x: 0,
+                                    y: 0
+                                },
+                                targetTo: {
+                                    x: 0.5,
+                                    y: 0.5
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        name: 'finishGrow',
+                        tweens: [
+                            {
+                                name: 'growIn',
+                                tweenType: PIXITWEENS.scale,
+                                runtime: 2000,
+                                startDelay: 7500,
                                 easing: 'outQuint',
                                 targetFrom: {
                                     x: 0.5,
                                     y: 0.5
                                 },
                                 targetTo: {
-                                    x: 1,
-                                    y: 1
+                                    x: 0.8,
+                                    y: 0.8
                                 }
                             }
                         ]
@@ -99,6 +301,7 @@ class StarfieldScene extends PixiScene {
                 ],
             }
         );
+
 
         const starContainerMoving = this.pixiObjectConstructor.constructById(
             6,
@@ -115,8 +318,8 @@ class StarfieldScene extends PixiScene {
             starContainer,
         );
 
-        const staticStars = (starId, starCount, container) => {
-            const fieldDistFromCenter = 2000;
+        const staticStars = (starId, starCount, container, dist) => {
+            const fieldDistFromCenter = dist ? dist : 2000;
             let posOrNegX = 1;
             let posOrNegY = 1;
             let scaleAdder = 0.5;
@@ -138,7 +341,7 @@ class StarfieldScene extends PixiScene {
                     posOrNegY = -1
                 }
 
-                startDelay = Math.random() * 3000 + 2000;
+                startDelay = Math.random() * 2000 + 500;
 
                 scaleRandom = Math.random();
 
@@ -156,8 +359,8 @@ class StarfieldScene extends PixiScene {
                             {
                                 name: 'twinkle',
                                 tweenType: PIXITWEENS.opacity,
-                                runtime: 3000,
-                                startDelay: startDelay,
+                                runtime: 500 + Math.random() * 500,
+                                startDelay: startDelay * 8,
                                 easing: 'linear',
                                 playAtStart: true,
                                 isLooping: true,
@@ -190,7 +393,7 @@ class StarfieldScene extends PixiScene {
         }
 
         const streakStars = () => {
-            const fieldDistFromCenter = 350;
+            const fieldDistFromCenter = 250;
             const fieldDistForTween = 2000;
             let posX = 0;
             let posY = 0;
@@ -201,7 +404,7 @@ class StarfieldScene extends PixiScene {
             let startDelay = 0;
             let runtime = 0;
 
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 50; i++) {
                 angle = Math.random() * 360;
                 radians = angle * (Math.PI / 180);
                 posX = fieldDistFromCenter * Math.cos(radians);
@@ -243,7 +446,7 @@ class StarfieldScene extends PixiScene {
                                     {
                                         name: 'fadeIn',
                                         tweenType: PIXITWEENS.opacity,
-                                        runtime: runtime * 0.1,
+                                        runtime: runtime * 0.2,
                                         startDelay: startDelay,
                                         easing: 'linear',
                                         playAtStart: true,
@@ -252,6 +455,22 @@ class StarfieldScene extends PixiScene {
                                         },
                                         targetTo: {
                                             x: 1,
+                                        }
+                                    },
+                                    {
+                                        name: 'growIn',
+                                        tweenType: PIXITWEENS.opacity,
+                                        runtime: runtime * 0.2,
+                                        startDelay: startDelay,
+                                        easing: 'linear',
+                                        playAtStart: true,
+                                        targetFrom: {
+                                            x: 0,
+                                            y: 0
+                                        },
+                                        targetTo: {
+                                            x: 1,
+                                            y: 1
                                         }
                                     }
                                 ]
@@ -263,7 +482,7 @@ class StarfieldScene extends PixiScene {
         }
 
         const streakStarBurst = () => {
-            const fieldDistFromCenter = 250;
+            const fieldDistFromCenter = 200;
             let fieldDistOffset = 0;
             const fieldDistForTween = 2000;
             let posX = 0;
@@ -320,7 +539,7 @@ class StarfieldScene extends PixiScene {
                                     {
                                         name: 'fadeIn',
                                         tweenType: PIXITWEENS.opacity,
-                                        runtime: runtime * 0.1,
+                                        runtime: runtime * (0.05 + 0.1 * Math.random()),
                                         startDelay: startDelay,
                                         easing: 'linear',
                                         playAtStart: true,
@@ -340,7 +559,7 @@ class StarfieldScene extends PixiScene {
         }
 
         const movingStars = () => {
-            const fieldDistFromCenter = 200;
+            const fieldDistFromCenter = 150;
             const fieldDistForTween = 2000;
             let posX = 0;
             let posY = 0;
@@ -360,8 +579,8 @@ class StarfieldScene extends PixiScene {
                 destX = fieldDistForTween * Math.cos(radians);
                 destY = fieldDistForTween * Math.sin(radians);
                 startDelay = Math.random() * 2500;
-                runtime = 1500 + Math.random() * 1500;
-                scale = 0.5 + Math.random();
+                runtime = 1500 + Math.random() * 500;
+                scale = 0.1 + Math.random() * 0.5;
 
                 this.pixiObjectConstructor.constructById(
                     3,
@@ -395,7 +614,7 @@ class StarfieldScene extends PixiScene {
                                     {
                                         name: 'grow',
                                         tweenType: PIXITWEENS.scale,
-                                        runtime: runtime,
+                                        runtime: runtime * 0.5,
                                         startDelay: startDelay,
                                         easing: 'linear',
                                         playAtStart: true,
@@ -404,14 +623,14 @@ class StarfieldScene extends PixiScene {
                                             y: scale
                                         },
                                         targetTo: {
-                                            x: scale * 1.5,
-                                            y: scale * 1.5
+                                            x: scale * 1.75,
+                                            y: scale * 1.75
                                         }
                                     },
                                     {
-                                        name: 'fadeInOut',
+                                        name: 'fadeIn',
                                         tweenType: PIXITWEENS.opacity,
-                                        runtime: runtime * 0.1,
+                                        runtime: runtime * (0.05 + (0.2 * Math.random())),
                                         startDelay: startDelay,
                                         easing: 'linear',
                                         playAtStart: true,
@@ -438,16 +657,26 @@ class StarfieldScene extends PixiScene {
             });
         }
 
-        staticStars(0, 550, starContainerFade);
-        staticStars(1, 100, starContainerFade);
-        staticStars(0, 100, starContainerPermenant);
+        staticStars(0, 350, starContainerFade1);
+        staticStars(1, 50, starContainerFade1);
+        staticStars(0, 350, starContainerFade2);
+        staticStars(1, 50, starContainerFade2);
+        staticStars(0, 350, starContainerFade3);
+        staticStars(0, 100, starContainerPermenant1);
+        staticStars(0, 3, starContainerPermenant2, 200);
+        staticStars(0, 10, starContainerPermenant2, 1000);
 
         setTimeout(() => {
             startAnimChain();
         }, 10000);
 
         const startAnimChain = () => {
-            starContainerFade.tweenGroups[0].startAllTweens()
+            starContainerFade1.tweenGroups[0].startAllTweens();
+            starContainerFade2.tweenGroups[0].startAllTweens();
+            starContainerFade3.tweenGroups[0].startAllTweens();
+            starContainerPermenant2.tweenGroups[0].startAllTweens();
+            starContainerPermenant2.tweenGroups[1].startAllTweens();
+            blur.tweenGroups[0].startAllTweens();
 
             streakStarBurst();
             streakStars();
@@ -455,16 +684,21 @@ class StarfieldScene extends PixiScene {
 
             setTimeout(() => {
                 stopChildrenTweenGroupsLooping(starContainerStreakBurst);
+                blur.tweenGroups[1].startAllTweens();
             }, 1000)
 
             setTimeout(() => {
-                stopChildrenTweenGroupsLooping(starContainerStreak);
                 stopChildrenTweenGroupsLooping(starContainerMoving);
-            }, 6000)
+            }, 5000)
 
             setTimeout(() => {
-                starContainerPermenant.tweenGroups[0].startAllTweens()
-            }, 8000)
+                stopChildrenTweenGroupsLooping(starContainerStreak);
+            }, 5500)
+
+            setTimeout(() => {
+                starContainerPermenant1.tweenGroups[0].startAllTweens();
+                blur.tweenGroups[2].startAllTweens();
+            }, 7500)
         }
     }
 
