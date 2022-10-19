@@ -7,18 +7,22 @@ const PixiDiv = () => {
   const appDiv = useRef();
   const pixiName = 'PixiHyperjump'
   let pixiAppManager;
-  const canvasSettings = {
+  const CANVASSETTINGS = {
     baseWidth: 1920,
     baseHeight: 1080,
     canvasWidth: null,
     canvasHeight: null,
     scaleTo: 'height',
     bgColor: 0x050017
-  }
-  const scenes = [StarfieldScene]
+  };
+  const SCENES = [StarfieldScene];
+  const INTERPOSER = {
+    startAnimFunc: null,
+    showTextFunc: null
+  };
 
   const setupPixi = (parentElement) => {
-    pixiAppManager = new PixiAppManager(PIXIOBJECTS, parentElement, pixiName, canvasSettings, scenes);
+    pixiAppManager = new PixiAppManager(PIXIOBJECTS, parentElement, pixiName, CANVASSETTINGS, SCENES, INTERPOSER);
   };
 
   useEffect(() => {
@@ -28,7 +32,12 @@ const PixiDiv = () => {
   }, []);
 
   return (
-    <div className="pixiApp" ref={appDiv} style={{height: '100vh', overflow: 'hidden'}}/>
+    <div className="pixiApp" ref={appDiv} style={{
+      height: '100vh',
+      width: '100vw',
+      position: 'absolute',
+      overflow: 'hidden'
+    }}/>
   );
 }
 

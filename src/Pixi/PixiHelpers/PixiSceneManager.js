@@ -1,11 +1,13 @@
 //Manages the diffent scenes in a pixi app
 //Load, Unload and change between differnt scenes
 class PixiSceneManager {
+    pixiAppManager;
     pixiApp;
     pixiObjectConstructor;
     scenes = [];
 
-    constructor(pixiApp, pixiObjectConstructor, scenes) {
+    constructor(pixiAppManager, pixiApp, pixiObjectConstructor, scenes) {
+        this.pixiAppManager = pixiAppManager;
         this.pixiApp = pixiApp;
         this.pixiObjectConstructor = pixiObjectConstructor;
 

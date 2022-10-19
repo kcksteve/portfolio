@@ -80,6 +80,7 @@ class PixiCanvasManager {
         this.pixiApp.view.style.display = 'block';
     }
 
+    //Applies a hex color to the canvas as the background color
     applyBgColor(color) {
         this.pixiApp.renderer.backgroundColor = color;
     }
