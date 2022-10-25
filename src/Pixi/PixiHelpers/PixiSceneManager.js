@@ -14,10 +14,6 @@ class PixiSceneManager {
         scenes.forEach(scene => {
             this.scenes.push(new scene(this, pixiObjectConstructor));
         });
-
-        this.scenes.find(scene =>
-            scene.isDefault === true
-        ).load(this.pixiApp.stage);
     }
 
     //Unload any active scenes and load the specified scenes
@@ -29,6 +25,13 @@ class PixiSceneManager {
         });
 
         this.loadScene(sceneName);
+    }
+
+    //Load the default scene
+    loadDefaultScene() {
+        this.scenes.find(scene =>
+            scene.isDefault === true
+        ).load(this.pixiApp.stage);
     }
 
     //Load a scene by its name

@@ -1,15 +1,12 @@
 import PixiScene from "../PixiHelpers/PixiScene";
 import PIXITWEENS from '../PixiHelpers/Behaviors/PixiTweens';
-import { Howl } from 'howler';
-import launchSound from '../../audio/launch.mp3';
-import echoSound from '../../audio/echoes.mp3';
-import exitSound from '../../audio/exit.mp3';
 import PixiAppManager from "../PixiHelpers/PixiAppManager";
 import PixiSceneManager from "../PixiHelpers/PixiSceneManager";
 
 class StarfieldScene extends PixiScene {
     name = 'starfield';
     isDefault = true;
+    howls = this.sceneManager.pixiAppManager.howlManager.howls;
 
     constructor(sceneManager, pixiObjects) {
         super(sceneManager, pixiObjects);
@@ -17,10 +14,6 @@ class StarfieldScene extends PixiScene {
 
     load(parent) {
         super.load(parent);
-
-        const launchSfx = new Howl({src: [launchSound]});
-        const echoSfx = new Howl({src: [echoSound]});
-        const exitSfx = new Howl({src: [exitSound]});
 
         const blur = this.pixiObjectConstructor.constructById(
             7,
@@ -459,7 +452,7 @@ class StarfieldScene extends PixiScene {
         }, 10000);
 
         const startAnimChain = () => {
-            launchSfx.play();
+            this.howls[0].play();
 
             setTimeout(() => {
                 starContainerFade1.tweenGroups[0].startAllTweens();
@@ -476,7 +469,7 @@ class StarfieldScene extends PixiScene {
                 setTimeout(() => {
                     stopChildrenTweenGroupsLooping(starContainerStreakBurst);
                     blur.tweenGroups[1].startAllTweens();
-                    echoSfx.play();
+                    //echoSfx.play();
                 }, 1000)
 
                 setTimeout(() => {
@@ -490,7 +483,7 @@ class StarfieldScene extends PixiScene {
                 setTimeout(() => {
                     starContainerPermenant1.tweenGroups[0].startAllTweens();
                     blur.tweenGroups[2].startAllTweens();
-                    exitSfx.play();
+                    //exitSfx.play();
                 }, 7500)
             }, 100)
         }

@@ -9,6 +9,8 @@ class PixiLoadingManager {
     pixiObjects;
     //function to call when all images loaded - guards against scenes loading before objects can be constructed
     loadedCallback;
+    //True if all images are loaded
+    isLoaded = false;
 
     constructor(pixiApp, pixiObjects, pixiAppManager, loadedCallback) {
         this.pixiApp = pixiApp;
@@ -27,7 +29,8 @@ class PixiLoadingManager {
         this.pixiApp.loader.load((loader, resources) => {
             //Pass the loaded resources to the object constructor so they can be used in creating objects
             this.pixiAppManager.pixiObjectConstructor.pixiResources = resources;
-            this.loadedCallback()
+            this.isLoaded = true;
+            this.loadedCallback();
         });
     }
 }
