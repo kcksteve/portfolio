@@ -27,7 +27,8 @@ const PixiDiv = () => {
     ],
     interposer: {
       startAnimFunc: null,
-      showTextFunc: null
+      showTextFunc: null,
+      showButtonFunc: null
     }
   };
 
