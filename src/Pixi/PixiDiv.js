@@ -5,7 +5,7 @@ import StarfieldScene from './Scenes/StarfieldScene';
 import HowlManager from './PixiAssistHowler/HowlManager';
 import HOWLOBJECTS from './howlObjects';
 
-const PixiDiv = () => {
+const PixiDiv = ({ startAnim, setStartAnim }) => {
   const appDiv = useRef();
   let pixiAppManager;
   let howlManager;
@@ -32,6 +32,8 @@ const PixiDiv = () => {
     }
   };
 
+  //startAnim = pixiAppConfig.interposer.startAnimFunc;
+
   const setupPixi = () => {
     pixiAppConfig.howlManager = new HowlManager(HOWLOBJECTS);
     pixiAppManager = new PixiAppManager(pixiAppConfig);
@@ -42,6 +44,9 @@ const PixiDiv = () => {
       pixiAppConfig.parentElement = appDiv.current;
       setupPixi();
     }
+
+    startAnim();
+    setStartAnim(() => () => pixiAppConfig.interposer.startAnimFunc(true));
   }, []);
 
   return (

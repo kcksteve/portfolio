@@ -75,7 +75,7 @@ class StarfieldScene extends PixiScene {
         this.staticStars(0, 3, this.starContainerPermenant2, 200);
         this.staticStars(0, 10, this.starContainerPermenant2, 1000);
 
-        this.sceneManager.pixiAppManager.interposerObject.startAnimFunc = this.startAnimChain;
+        this.sceneManager.pixiAppManager.interposerObject.startAnimFunc = (playSound) => this.startAnimChain(playSound);
         console.log(this.sceneManager.pixiAppManager.interposerObject);
 
         setTimeout(() => {
@@ -84,9 +84,9 @@ class StarfieldScene extends PixiScene {
             }
         }, 3000);
 
-        setTimeout(() => {
-            this.startAnimChain(true);
-        }, 10000);
+        // setTimeout(() => {
+        //     this.startAnimChain(true);
+        // }, 10000);
     }
 
     unload() {
