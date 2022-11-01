@@ -1,13 +1,13 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import PixiAppManager from './PixiHelpers/PixiAppManager';
 import PIXIOBJECTS from './pixiObjects';
 import StarfieldScene from './Scenes/StarfieldScene';
 import HowlManager from './PixiAssistHowler/HowlManager';
 import HOWLOBJECTS from './howlObjects';
 
-const PixiDiv = ({ startAnim, setStartAnim }) => {
+const PixiDiv = ({ startAnim, setStartAnim, playSfx, setShowSite, setShowLaunch }) => {
   const appDiv = useRef();
-  let pixiAppManager;
+  const[pixiAppManager, setPixiAppManager] = useState();
   let howlManager;
 
   const pixiAppConfig = {
@@ -27,8 +27,9 @@ const PixiDiv = ({ startAnim, setStartAnim }) => {
     ],
     interposer: {
       startAnimFunc: null,
-      showTextFunc: null,
-      showButtonFunc: null
+      showSiteFunc: null,
+      showLaunchBtnFunc: null,
+      playSfx: null,
     }
   };
 
@@ -36,18 +37,27 @@ const PixiDiv = ({ startAnim, setStartAnim }) => {
 
   const setupPixi = () => {
     pixiAppConfig.howlManager = new HowlManager(HOWLOBJECTS);
-    pixiAppManager = new PixiAppManager(pixiAppConfig);
+    setPixiAppManager(new PixiAppManager(pixiAppConfig));
   };
 
   useEffect(() => {
-    if (!document.getElementById(pixiAppConfig.pixiName)) {
+    setStartAnim(() => () => pixiAppConfig.interposer.startAnimFunc());
+    pixiAppConfig.interposer.showLaunchBtnFunc = setShowLaunch;
+    pixiAppConfig.interposer.showSiteFunc = setShowSite;
+    pixiAppConfig.interposer.playSfx = playSfx;
+
+    if (document.getElementById(pixiAppConfig.name) === null) {
       pixiAppConfig.parentElement = appDiv.current;
       setupPixi();
     }
-
-    startAnim();
-    setStartAnim(() => () => pixiAppConfig.interposer.startAnimFunc(true));
   }, []);
+
+  useEffect(() => {
+    if (pixiAppManager && pixiAppManager.hasOwnProperty('interposerObject')) {
+      pixiAppManager.interposerObject.playSfx = playSfx
+      console.log(pixiAppManager.interposerObject.playSfx);
+    }
+  }, [playSfx])
 
   return (
     <div className="pixiApp" ref={appDiv} style={{

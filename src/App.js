@@ -1,15 +1,31 @@
 import { useState } from 'react';
 import './App.css';
-import StartButton from './components/StartButton';
+import StartButtonGroup from './components/StartButtonGroup';
 import PixiDiv from './Pixi/PixiDiv';
 
 function App() {
-  let [startAnimLink, setStartAnimLink] = useState(() => () => {console.log('testing')});
+  const [startAnimLink, setStartAnimLink] = useState(() => () => {console.log('testing')});
+  const [playSfx, setPlaySfx] = useState(true);
+  const [showSite, setShowSite] = useState(false);
+  const [showLaunchBtn, setShowLaunchBtn] = useState(false);
 
   return (
     <div className="App">
-      <PixiDiv startAnim={startAnimLink} setStartAnim={setStartAnimLink}/>
-      <StartButton startAnim={startAnimLink}/>
+      <PixiDiv
+        startAnim={startAnimLink}
+        setStartAnim={setStartAnimLink}
+        playSfx={playSfx}
+        setShowSite={setShowSite}
+        setShowLaunch={setShowLaunchBtn}
+      />
+      {showLaunchBtn &&
+        <StartButtonGroup
+          startAnim={startAnimLink}
+          playSfx={playSfx}
+          setPlaySfx={setPlaySfx}
+        />
+      }
+
     </div>
   );
 }
