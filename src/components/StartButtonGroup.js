@@ -1,4 +1,10 @@
-const StartButtonGroup = ({ startAnim, playSfx, setPlaySfx }) => {
+import { useEffect, useState } from "react"
+import volumeOnLight from '../images/volume-on-light.png'
+import volumeOnDark from '../images/volume-on-dark.png'
+import volumeOffLight from '../images/volume-off-light.png'
+import volumeOffDark from '../images/volume-off-dark.png'
+
+const StartButtonGroup = ({ startAnim, playSfx, setPlaySfx, setShowLaunchBtn }) => {
     const divStyle = {
         position: 'absolute',
         width: '400px',
@@ -6,35 +12,72 @@ const StartButtonGroup = ({ startAnim, playSfx, setPlaySfx }) => {
         top: '50%',
         left: '50%',
         marginTop: '-25px',
-        marginLeft: '-200px'
+        marginLeft: '-200px',
+        display: 'flex'
     }
 
-    const launchBtnStyle = {
-        width: '80%',
-        height: '100%',
-        backgroundColor: 'rgba(0,0,0,0)',
-        color: 'rgba(255,255,255,255)',
-        border: '2px solid',
-        fontSize: '20px'
-    }
+    const [launchClasses, setLaunchClasses] = useState('launchBtns launchBtn launchBtnTransition');
+    const [sfxClasses, setSfxClasses] = useState('launchBtns sfxBtn launchBtnTransition');
+    const [buttonsActive, setButtonsActive] = useState(true);
 
-    const sfxBtnStyle = {
-        width: '18%',
-        height: '100%',
-        marginLeft: '2%',
-        backgroundColor: 'rgba(0,0,0,0)',
-        color: 'rgba(255,255,255,255)',
-        border: '2px solid'
-    }
+    const [sfxImg, setSfxImg] = useState('Sfx')
+    const [sfxIsHovered, setSfxIsHovered] = useState(false);
+
+    useEffect(() => {
+        if (playSfx) {
+            if (sfxIsHovered) {
+                setSfxImg(volumeOnDark);
+            } else {
+                setSfxImg(volumeOnLight);
+            }
+        } else {
+            if (sfxIsHovered) {
+                setSfxImg(volumeOffDark);
+            } else {
+                setSfxImg(volumeOffLight);
+            }
+        }
+    }, [playSfx, sfxIsHovered])
 
     return (
-        <div style={divStyle}>
-            <button className='launchBtns launchBtn' onClick={startAnim}>
+        <div className={'launchBtnFadeAnim'} style={divStyle}>
+            <div
+                className={launchClasses}
+                onClick={
+                    () => {
+                        if (buttonsActive) {
+                            setButtonsActive(false);
+                            setLaunchClasses('launchBtns launchBtnExpand launchBtnTransition');
+                            setSfxClasses('launchBtns sfxBtnShrink launchBtnTransition');
+                            setTimeout(() => startAnim(), 1000);
+                            setTimeout(() => setShowLaunchBtn(false), 2000);
+                        }
+                    }
+                }>
                 LAUNCH
-            </button>
-            <button className='launchBtns sfxBtn' onClick={() => {setPlaySfx(!playSfx)}}>
-                {playSfx ? 'Sfx' : 'No Sfx'}
-            </button>
+            </div>
+            <div
+                className={sfxClasses}
+                onClick={
+                    () => {
+                        if (buttonsActive) {
+                            setPlaySfx(!playSfx);
+                        }
+                    }
+                }
+                onMouseEnter={
+                    () => {
+                        setSfxIsHovered(true);
+                    }
+                }
+                onMouseLeave={
+                    () => {
+                        setSfxIsHovered(false);
+                    }
+                }
+                >
+                <img className={'sfxBtnImg'}  src={sfxImg}/>
+            </div>
         </div>
     )
 }

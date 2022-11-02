@@ -23,6 +23,7 @@ function App() {
           startAnim={startAnimLink}
           playSfx={playSfx}
           setPlaySfx={setPlaySfx}
+          setShowLaunchBtn={setShowLaunchBtn}
         />
       }
 

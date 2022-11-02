@@ -469,7 +469,6 @@ class StarfieldScene extends PixiScene {
     }
 
     startAnimChain() {
-        this.sceneManager.pixiAppManager.interposerObject.showLaunchBtnFunc(false);
         const playSound = this.sceneManager.pixiAppManager.interposerObject.playSfx;
         console.log(this.sceneManager.pixiAppManager.interposerObject);
         if (playSound) { this.howls[0].play(); }
