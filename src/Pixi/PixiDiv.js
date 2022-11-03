@@ -33,8 +33,6 @@ const PixiDiv = ({ startAnim, setStartAnim, playSfx, setShowSite, setShowLaunch 
     }
   };
 
-  //startAnim = pixiAppConfig.interposer.startAnimFunc;
-
   const setupPixi = () => {
     pixiAppConfig.howlManager = new HowlManager(HOWLOBJECTS);
     setPixiAppManager(new PixiAppManager(pixiAppConfig));

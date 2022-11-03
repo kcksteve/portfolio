@@ -5,21 +5,9 @@ import volumeOffLight from '../images/volume-off-light.png'
 import volumeOffDark from '../images/volume-off-dark.png'
 
 const StartButtonGroup = ({ startAnim, playSfx, setPlaySfx, setShowLaunchBtn }) => {
-    const divStyle = {
-        position: 'absolute',
-        width: '400px',
-        height: '50px',
-        top: '50%',
-        left: '50%',
-        marginTop: '-25px',
-        marginLeft: '-200px',
-        display: 'flex'
-    }
-
     const [launchClasses, setLaunchClasses] = useState('launchBtns launchBtn launchBtnTransition');
     const [sfxClasses, setSfxClasses] = useState('launchBtns sfxBtn launchBtnTransition');
     const [buttonsActive, setButtonsActive] = useState(true);
-
     const [sfxImg, setSfxImg] = useState('Sfx')
     const [sfxIsHovered, setSfxIsHovered] = useState(false);
 
@@ -40,7 +28,7 @@ const StartButtonGroup = ({ startAnim, playSfx, setPlaySfx, setShowLaunchBtn }) 
     }, [playSfx, sfxIsHovered])
 
     return (
-        <div className={'launchBtnFadeAnim'} style={divStyle}>
+        <div className={'launchBtnFadeAnim launchBtnGroup'}>
             <div
                 className={launchClasses}
                 onClick={
@@ -76,7 +64,7 @@ const StartButtonGroup = ({ startAnim, playSfx, setPlaySfx, setShowLaunchBtn }) 
                     }
                 }
                 >
-                <img className={'sfxBtnImg'}  src={sfxImg}/>
+                <img className='sfxBtnImg'  src={sfxImg} alt='mute icon'/>
             </div>
         </div>
     )

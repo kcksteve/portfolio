@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import './App.css';
 import StartButtonGroup from './components/StartButtonGroup';
+import MainPage from './components/MainPage';
 import PixiDiv from './Pixi/PixiDiv';
 
 function App() {
-  const [startAnimLink, setStartAnimLink] = useState(() => () => {console.log('testing')});
-  const [playSfx, setPlaySfx] = useState(true);
+  const [startAnimLink, setStartAnimLink] = useState();
+  const [playSfx, setPlaySfx] = useState(false);
   const [showSite, setShowSite] = useState(false);
   const [showLaunchBtn, setShowLaunchBtn] = useState(false);
 
@@ -26,7 +27,10 @@ function App() {
           setShowLaunchBtn={setShowLaunchBtn}
         />
       }
-
+      {
+        showSite &&
+        <MainPage/>
+      }
     </div>
   );
 }
