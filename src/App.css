@@ -39,12 +39,12 @@
 
 .launchBtnGroup {
   position: absolute;
+  max-width: 90vw;
   width: 400px;
   height: 50px;
   top: 50%;
   left: 50%;
-  margin-top: -25px;
-  margin-left: -200px;
+  transform: translate(-50%, -50%);
   display: flex;
 }
 
@@ -134,6 +134,10 @@
   margin: auto;
 }
 
+:root {
+  --name-font-size: calc(30px + 7vw)
+}
+
 .nameDiv {
   height: 100vh;
   display: flex;
@@ -141,7 +145,7 @@
   align-items: center;
   color: white;
   font-family: 'MontBold';
-  font-size: 8vw;
+  font-size: var(--name-font-size);
   margin: auto;
 }
 
@@ -153,5 +157,11 @@
 
 @keyframes nameGrow {
   from {font-size: 0;}
-  to {font-size: 8vw;}
+  to {font-size: var(--name-font-size);}
+}
+
+.nameTitle {
+  color: white;
+  font-family: 'MontReg';
+  font-size: 40px;
 }

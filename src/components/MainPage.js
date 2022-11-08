@@ -2,8 +2,11 @@ const MainPage = () => {
     return(
         <div className='mainPage'>
             <div className='nameDiv nameGrowAnim'>
-                STEPHEN<br/>KRAWCZYK
+                <div>
+                    STEPHEN<br/>KRAWCZYK<br/><div className="nameTitle">SOFTWARE DEVELOPER</div>
+                </div>
             </div>
+
         </div>
     )
 }
