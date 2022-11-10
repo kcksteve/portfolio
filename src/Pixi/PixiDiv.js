@@ -39,12 +39,11 @@ const PixiDiv = ({ startAnim, setStartAnim, playSfx, setShowSite, setShowLaunch 
   };
 
   useEffect(() => {
-    setStartAnim(() => () => pixiAppConfig.interposer.startAnimFunc());
-    pixiAppConfig.interposer.showLaunchBtnFunc = setShowLaunch;
-    pixiAppConfig.interposer.showSiteFunc = setShowSite;
-    pixiAppConfig.interposer.playSfx = playSfx;
-
     if (document.getElementById(pixiAppConfig.name) === null) {
+      setStartAnim(() => () => pixiAppConfig.interposer.startAnimFunc());
+      pixiAppConfig.interposer.showLaunchBtnFunc = setShowLaunch;
+      pixiAppConfig.interposer.showSiteFunc = setShowSite;
+      pixiAppConfig.interposer.playSfx = playSfx;
       pixiAppConfig.parentElement = appDiv.current;
       setupPixi();
     }

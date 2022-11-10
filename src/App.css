@@ -135,7 +135,9 @@
 }
 
 :root {
-  --name-font-size: calc(30px + 7vw)
+  --name-font-size: calc(30px + 5vw);
+  --name-title-font-size: calc(12px + 2vw);
+  --name-title2-font-size: calc(16px + 2.6vw);
 }
 
 .nameDiv {
@@ -160,8 +162,50 @@
   to {font-size: var(--name-font-size);}
 }
 
+.nameTitleFade {
+  animation-name: nameTitleFade;
+  animation-duration: 4.05s;
+  animation-timing-function: ease-out;
+}
+
+@keyframes nameTitleFade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
+.nameTitleFade2 {
+  animation-name: nameTitleFade2;
+  animation-duration: 6.05s;
+  animation-timing-function: ease-out;
+}
+
+@keyframes nameTitleFade2 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
 .nameTitle {
   color: white;
   font-family: 'MontReg';
-  font-size: 40px;
+  font-size: var(--name-title-font-size);
+}
+
+.nameTitle2 {
+  color: white;
+  font-family: 'MontReg';
+  font-size: var(--name-title2-font-size);
 }

@@ -3,7 +3,7 @@ const MainPage = () => {
         <div className='mainPage'>
             <div className='nameDiv nameGrowAnim'>
                 <div>
-                    STEPHEN<br/>KRAWCZYK<br/><div className="nameTitle">SOFTWARE DEVELOPER</div>
+                    STEPHEN<br/>KRAWCZYK<br/><div className="nameTitle nameTitleFade">SOFTWARE DEVELOPER</div><div className="nameTitle2 nameTitleFade2">WEB + GAMES</div>
                 </div>
             </div>
 
