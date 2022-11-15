@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import StartButtonGroup from './components/StartButtonGroup';
 import MainPage from './components/MainPage';
+import NavBar from './components/NavBar';
 import PixiDiv from './Pixi/PixiDiv';
 
 function App() {
@@ -26,6 +27,10 @@ function App() {
           setPlaySfx={setPlaySfx}
           setShowLaunchBtn={setShowLaunchBtn}
         />
+      }
+      {
+        showSite &&
+        <NavBar/>
       }
       {
         showSite &&

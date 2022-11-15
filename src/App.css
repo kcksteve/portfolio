@@ -198,6 +198,24 @@
   }
 }
 
+.nameBtnFade {
+  animation-name: nameBtnFade;
+  animation-duration: 9.05s;
+  animation-timing-function: ease-out;
+}
+
+@keyframes nameBtnFade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
 .nameTitle {
   color: white;
   font-family: 'MontReg';
@@ -208,4 +226,43 @@
   color: white;
   font-family: 'MontReg';
   font-size: var(--name-title2-font-size);
+}
+
+.nameBtn {
+  color: white;
+  font-family: 'MontBold';
+  font-size: var(--name-title2-font-size);
+  margin: 25px auto;
+  padding: 10px 0px;
+  border-width: 3px;
+  border-color: white;
+  border-style: solid;
+  width: 75%;
+}
+
+.nameBtn:hover {
+  background-color: white;
+  color: #050017;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.navBar {
+  position: absolute;
+  height: 100px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin: auto;
+}
+
+.navBarButton {
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'MontBold';
+  font-size: 20px;
+  margin: auto;
 }
