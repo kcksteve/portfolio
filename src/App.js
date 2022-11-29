@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import StartButtonGroup from './components/StartButtonGroup';
 import MainPage from './components/MainPage';
@@ -10,6 +10,9 @@ function App() {
   const [playSfx, setPlaySfx] = useState(false);
   const [showSite, setShowSite] = useState(false);
   const [showLaunchBtn, setShowLaunchBtn] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  useEffect(() => console.log(currentPage), [currentPage]);
 
   return (
     <div className="App">
@@ -30,7 +33,7 @@ function App() {
       }
       {
         showSite &&
-        <NavBar/>
+        <NavBar setCurrentPage={setCurrentPage}/>
       }
       {
         showSite &&

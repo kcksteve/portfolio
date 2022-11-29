@@ -1,11 +1,11 @@
 import NavBarButton from "./NavBarButton";
 
-const NavBar = () => {
+const NavBar = ({ setCurrentPage }) => {
     return (
-        <div className='navBar'>
-            <NavBarButton name='Button1'/>
-            <NavBarButton name='Button2'/>
-            <NavBarButton name='Button3'/>
+        <div className='navBar navbarFade'>
+            <NavBarButton name='ABOUT' pageId={1} setCurrentPage={setCurrentPage}/>
+            <NavBarButton name='PROJECTS' pageId={2} setCurrentPage={setCurrentPage}/>
+            <NavBarButton name='CONTACT' pageId={3} setCurrentPage={setCurrentPage}/>
         </div>
     )
 }

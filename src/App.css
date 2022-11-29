@@ -247,22 +247,50 @@
   cursor: pointer;
 }
 
+.navbarFade {
+  animation-name: navbarFade;
+  animation-duration: 9.55s;
+  animation-timing-function: ease-out;
+}
+
+@keyframes navbarFade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
 .navBar {
   position: absolute;
+  left: 0;
+  right: 0;
   height: 100px;
-  width: 100vw;
+  width: 100%;
+  max-width: 1000px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   color: white;
   margin: auto;
+  z-index: 100;
 }
 
 .navBarButton {
   justify-content: center;
   align-items: center;
   color: white;
-  font-family: 'MontBold';
+  font-family: 'MontReg';
   font-size: 20px;
   margin: auto;
+  cursor: pointer;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.navBarButton:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
