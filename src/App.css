@@ -294,3 +294,18 @@
   text-decoration: underline;
   text-decoration-thickness: 2px;
 }
+
+.generalFadeIn {
+  animation-name: generalFadeIn;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+}
+
+@keyframes generalFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}

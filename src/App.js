@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import StartButtonGroup from './components/StartButtonGroup';
 import MainPage from './components/MainPage';
+import AboutPage from './components/AboutPage';
+import ProjectsPage from './components/ProjectsPage';
+import ContactPage from './components/ContactPage';
 import NavBar from './components/NavBar';
 import PixiDiv from './Pixi/PixiDiv';
 
@@ -11,8 +14,24 @@ function App() {
   const [showSite, setShowSite] = useState(false);
   const [showLaunchBtn, setShowLaunchBtn] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+  const [pageComponent, setPageComponent] = useState();
 
-  useEffect(() => console.log(currentPage), [currentPage]);
+  useEffect(() => {
+    switch(currentPage) {
+      case 0:
+        setPageComponent(<MainPage setCurrentPage={setCurrentPage}/>);
+        break;
+      case 1:
+        setPageComponent(<AboutPage/>);
+        break;
+      case 2:
+        setPageComponent(<ProjectsPage/>);
+        break;
+      case 3:
+        setPageComponent(<ContactPage/>);
+        break;
+    }
+  }, [currentPage]);
 
   return (
     <div className="App">
@@ -37,7 +56,7 @@ function App() {
       }
       {
         showSite &&
-        <MainPage/>
+        pageComponent
       }
     </div>
   );
