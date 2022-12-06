@@ -138,6 +138,8 @@
   --name-font-size: calc(30px + 5vw);
   --name-title-font-size: calc(12px + 2vw);
   --name-title2-font-size: calc(16px + 2.6vw);
+  --common-font-size: calc(40px + 0.5vw);
+  --common-title-font-size: calc(25px + 0.5vw);
 }
 
 .nameDiv {
@@ -308,4 +310,27 @@
   100% {
     opacity: 100;
   }
+}
+
+.commonDiv {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'MontBold';
+  font-size: var(--common-font-size);
+  margin: auto;
+}
+
+.commonTitle {
+  color: white;
+  font-family: 'MontReg';
+  font-size: var(--common-title-font-size);
+  margin-top: 15px;
+}
+
+.commonTitle a {
+  text-decoration: none;
+  color: inherit;
 }
